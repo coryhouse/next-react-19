@@ -1,9 +1,19 @@
-export function Spinner() {
+type SpinnerProps = {
+  size?: "small" | "medium" | "large";
+};
+
+export function Spinner({ size = "small" }: SpinnerProps) {
+  const sizeClasses = {
+    small: "w-6 h-6",
+    medium: "w-8 h-8",
+    large: "w-12 h-12",
+  };
+
   return (
-    <div role="status">
+    <span role="status">
       <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className={`${sizeClasses[size]} text-gray-200 animate-spin dark:text-gray-600 fill-blue-600`}
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -18,6 +28,6 @@ export function Spinner() {
         />
       </svg>
       <span className="sr-only">Loading...</span>
-    </div>
+    </span>
   );
 }
