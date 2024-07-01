@@ -1,3 +1,4 @@
+import { todoSchema } from "@/types/todo";
 import { AddTodoForm } from "./AddTodoForm";
 import { SubmitButton } from "./SubmitButton";
 import { deleteTodo } from "./actions";
@@ -6,12 +7,12 @@ export default async function Todos() {
   const resp = await fetch("http://localhost:3001/todos/", {
     cache: "no-store",
   });
-  const todos = await resp.json();
+  const todos = todoSchema.array().parse(await resp.json());
 
   return (
     <>
       <ul>
-        {todos.map((todo: any) => (
+        {todos.map((todo) => (
           <li key={todo.id} className="flex">
             <form action={deleteTodo}>
               <input type="hidden" name="id" value={todo.id} />
