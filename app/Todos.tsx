@@ -4,6 +4,7 @@ import { SubmitButton } from "./SubmitButton";
 import { deleteTodo } from "./actions";
 
 export default async function Todos() {
+  // NOTE: The trailing slash is required for the fetch to work
   const resp = await fetch("http://localhost:3001/todos/", {
     cache: "no-store",
   });
