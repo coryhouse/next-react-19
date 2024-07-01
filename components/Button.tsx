@@ -36,7 +36,7 @@ export function Button({
       {...buttonProps}
     >
       {isLoading ? (
-        <div className="flex-row gap-1 align-middle">
+        <div className="inline-flex gap-1 align-middle flex-nowrap">
           <Spinner />
           {loadingLabel}
         </div>
