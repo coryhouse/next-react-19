@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
+import { AddTodoFormState, emptyAddToDoFormState } from "./AddTodoForm";
 
 export async function deleteTodo(formData: FormData) {
   const id = formData.get("id");
@@ -12,9 +13,12 @@ export async function deleteTodo(formData: FormData) {
 
 // The function passed to useActionState receives an extra argument, the previous or initial state, as its first argument.
 // This makes its signature different than if it were used directly as a form action without using useActionState
-export async function addTodo(previousState, formData: FormData) {
+export async function addTodo(
+  previousState: AddTodoFormState,
+  formData: FormData
+) {
   const title = formData.get("title");
-  if (!title) return { titleError: "Title is required" };
+  if (!title) return { ...previousState, titleError: "Title is required" };
   const resp = await fetch("http://localhost:3001/todos/", {
     method: "POST",
     headers: {
@@ -22,7 +26,7 @@ export async function addTodo(previousState, formData: FormData) {
     },
     body: JSON.stringify({ title, completed: false }),
   });
-  const todo = await resp.json();
+  await resp.json();
   revalidateTag("todos");
-  return todo;
+  return emptyAddToDoFormState;
 }
