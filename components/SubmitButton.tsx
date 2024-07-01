@@ -16,8 +16,8 @@ export function SubmitButton({
 
   return (
     <Button
-      className="border p-1 bg-teal-400 mr-2"
-      isLoading={pending}
+      className="border p-1 bg-slate-200 border-gray-500 mr-2"
+      isLoading={true}
       loadingLabel={loadingLabel}
       type="submit"
     >
