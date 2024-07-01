@@ -1,6 +1,6 @@
 "use client";
 import { useFormState } from "react-dom";
-import { SubmitButton } from "./SubmitButton";
+import { SubmitButton } from "../components/SubmitButton";
 import { addTodo } from "./actions";
 
 export function AddTodoForm() {
