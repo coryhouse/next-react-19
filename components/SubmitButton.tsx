@@ -1,5 +1,6 @@
 "use client";
 import { useFormStatus } from "react-dom";
+import { Button } from "./Button";
 
 type SubmitButtonProps = {
   label: string;
@@ -10,13 +11,17 @@ type SubmitButtonProps = {
 export function SubmitButton({
   label,
   loadingLabel,
-  className = "",
 }: Readonly<SubmitButtonProps>) {
   const { pending } = useFormStatus();
 
   return (
-    <button className={className} type="submit" disabled={pending}>
-      {pending ? loadingLabel : label}
-    </button>
+    <Button
+      className="border p-1 bg-teal-400 mr-2"
+      isLoading={pending}
+      loadingLabel={loadingLabel}
+      type="submit"
+    >
+      {label}
+    </Button>
   );
 }
