@@ -10,8 +10,8 @@ export function AddTodoForm() {
   const [state, formAction] = useFormState(addTodo, { titleError: "" });
 
   return (
-    <form action={formAction}>
-      <input type="text" name="title" />
+    <form action={formAction} className="mt-4">
+      <input type="text" name="title" className="border-gray-500 border p-1" />
       <SubmitButton label="Add" loadingLabel="Adding..." />
       {state?.titleError && (
         <p role="alert" className="text-red-500">
