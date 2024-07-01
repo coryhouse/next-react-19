@@ -1,9 +1,13 @@
 "use server";
+
+import { revalidateTag } from "next/cache";
+
 export async function deleteTodo(formData: FormData) {
   const id = formData.get("id");
-  fetch("http://localhost:3001/todos/" + id, {
+  await fetch("http://localhost:3001/todos/" + id, {
     method: "DELETE",
   });
+  revalidateTag("todos");
 }
 
 // The function passed to useActionState receives an extra argument, the previous or initial state, as its first argument.
@@ -19,5 +23,6 @@ export async function addTodo(previousState, formData: FormData) {
     body: JSON.stringify({ title, completed: false }),
   });
   const todo = await resp.json();
+  revalidateTag("todos");
   return todo;
 }
