@@ -6,8 +6,9 @@ export async function deleteTodo(formData: FormData) {
   });
 }
 
-export async function addTodo(formData: FormData) {
+export async function addTodo(previousState, formData: FormData) {
   const title = formData.get("title");
+  if (!title) return { titleError: "Title is required" };
   const resp = await fetch("http://localhost:3001/todos/", {
     method: "POST",
     headers: {
