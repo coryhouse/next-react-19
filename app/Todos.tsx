@@ -1,5 +1,4 @@
-import { DeleteTodoButton } from "./DeleteTodoButton";
-import { AddTodoButton } from "./AddTodoButton";
+import { SubmitButton } from "./SubmitButton";
 import { addTodo, deleteTodo } from "./actions";
 
 export default async function Todos() {
@@ -15,7 +14,7 @@ export default async function Todos() {
           <li key={todo.id}>
             <form action={deleteTodo}>
               <input type="hidden" name="id" value={todo.id} />
-              <DeleteTodoButton />
+              <SubmitButton label="Delete" loadingLabel="Deleting..." />
             </form>
             {todo.title}
           </li>
@@ -24,7 +23,7 @@ export default async function Todos() {
 
       <form action={addTodo}>
         <input type="text" name="title" />
-        <AddTodoButton />
+        <SubmitButton label="Add" loadingLabel="Adding..." />
       </form>
     </>
   );
