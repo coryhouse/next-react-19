@@ -7,3 +7,11 @@ export const todoSchema = z.object({
 });
 
 export type Todo = z.infer<typeof todoSchema>;
+
+export const emptyAddToDoFormState: AddTodoFormState = {
+  titleError: "",
+};
+
+export type AddTodoFormState = {
+  titleError: string;
+};
