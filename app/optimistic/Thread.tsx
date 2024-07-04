@@ -1,7 +1,11 @@
 import { useOptimistic, useRef } from "react";
+type Message = {
+  text: string;
+  sending?: boolean;
+};
 
 type ThreadProps = {
-  messages: { text: string; sending?: boolean }[];
+  messages: Message[];
   sendMessage: (formData: FormData) => Promise<void>;
 };
 
