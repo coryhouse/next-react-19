@@ -1,7 +1,7 @@
 "use server";
 
+import { AddTodoFormState, emptyAddToDoFormState } from "@/types/todo";
 import { revalidateTag } from "next/cache";
-import { AddTodoFormState, emptyAddToDoFormState } from "./AddTodoForm";
 
 export async function deleteTodo(formData: FormData) {
   const id = formData.get("id");
