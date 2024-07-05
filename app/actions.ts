@@ -3,9 +3,12 @@
 import { AddTodoFormState, emptyAddToDoFormState } from "@/types/todo";
 import { revalidateTag } from "next/cache";
 
+// NOTE: The trailing slash is required for the fetch to work. Not sure why.
+const baseUrl = "http://localhost:3001/todos/";
+
 export async function deleteTodo(formData: FormData) {
   const id = formData.get("id");
-  await fetch("http://localhost:3001/todos/" + id, {
+  await fetch(baseUrl + id, {
     method: "DELETE",
   });
   revalidateTag("todos");
@@ -19,7 +22,7 @@ export async function addTodo(
 ) {
   const title = formData.get("title");
   if (!title) return { ...previousState, titleError: "Title is required" };
-  const resp = await fetch("http://localhost:3001/todos/", {
+    const resp = await fetch(baseUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
