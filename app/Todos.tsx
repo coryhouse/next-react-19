@@ -4,6 +4,7 @@ import { SubmitButton } from "../components/SubmitButton";
 import { addTodo, deleteTodo } from "./actions";
 import { useOptimistic, useRef } from "react";
 import { useFormState } from "react-dom";
+import { Button } from "@/components/Button";
 
 type TodosProps = {
   todos: Todo[];
@@ -60,7 +61,7 @@ export function Todos({ todos }: TodosProps) {
             state.titleError ? "border-red-500" : "border-gray-500"
           } border p-1`}
         />
-        <SubmitButton label="Add" loadingLabel="Adding..." />
+        <Button>Add</Button>
         {state?.titleError && (
           <p role="alert" className="text-red-500">
             {state?.titleError}
