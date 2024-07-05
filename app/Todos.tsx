@@ -15,7 +15,7 @@ export function Todos({ todos }: TodosProps) {
   // On RSC apps, makes forms interactive before JavaScript has executed on the client.
   // When used without Server Components, is equivalent to component local state.
   const [state, formAction] = useFormState(addTodo, emptyAddToDoFormState);
-  const formRef = useRef<HTMLFormElement>(null);
+  const addTodoFormRef = useRef<HTMLFormElement>(null);
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(
     todos,
     (state, newTodo: string) => [
@@ -46,10 +46,10 @@ export function Todos({ todos }: TodosProps) {
         ))}
       </ul>
       <form
-        ref={formRef}
+        ref={addTodoFormRef}
         action={(payload) => {
           addOptimisticTodo(payload.get("title") as string);
-          formRef.current?.reset(); // Clear form upon submit
+          addTodoFormRef.current?.reset(); // Clear form upon submit
           formAction(payload);
         }}
         className="mt-4"
