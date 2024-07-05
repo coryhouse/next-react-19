@@ -42,7 +42,7 @@ export function Button({
         </div>
       ) : (
         children
-      )}{" "}
+      )}
     </button>
   );
 }
