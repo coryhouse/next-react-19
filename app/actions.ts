@@ -14,6 +14,19 @@ export async function deleteTodo(formData: FormData) {
   revalidateTag("todos");
 }
 
+export async function toggleComplete(formData: FormData) {
+  const id = formData.get("id");
+  const resp = await fetch(baseUrl + id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ completed: true }),
+  });
+  await resp.json();
+  revalidateTag("todos");
+}
+
 // The function passed to useActionState receives an extra argument, the previous or initial state, as its first argument.
 // This makes its signature different than if it were used directly as a form action without using useActionState
 export async function addTodo(
