@@ -15,12 +15,7 @@ export function SubmitButton({
   const { pending } = useFormStatus();
 
   return (
-    <Button
-      className="border p-1 bg-slate-200 border-gray-500 mr-2"
-      isLoading={pending}
-      loadingLabel={loadingLabel}
-      type="submit"
-    >
+    <Button isLoading={pending} loadingLabel={loadingLabel} type="submit">
       {label}
     </Button>
   );

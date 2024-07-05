@@ -7,10 +7,10 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
    * - Display a loading spinner
    * - Set aria-disabled to true
    * - Ignore clicks */
-  isLoading: boolean;
+  isLoading?: boolean;
 
   /** Label to display instead of children when isLoading is true. By convention, we end this message with "ing..." to signify that we're waiting. For example, if the children prop is "Save", set this to "Saving..." */
-  loadingLabel: string;
+  loadingLabel?: string;
 
   /** Automatically true when `isLoading` is true. Setting this to true does the following:
    * - Display the button a gray color
@@ -20,14 +20,15 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({
-  isLoading,
-  loadingLabel,
+  isLoading = false,
+  loadingLabel = "",
   isDisabled = false,
   children,
   ...buttonProps
 }: ButtonProps) {
   return (
     <button
+      className="border p-1 bg-slate-200 border-gray-500 mr-2"
       onClick={(e) => {
         if (isLoading) return;
         buttonProps.onClick?.(e);
