@@ -17,8 +17,8 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
   /** Specify input's width */
   width?: "full" | "default";
 
-  /** When true, the border is red instead of gray */
-  isError?: boolean;
+  /** Validation error to display below the input. When provided, the input is also styled in red. */
+  error?: string;
 }
 
 export default function Input(props: InputProps) {
@@ -29,29 +29,34 @@ export default function Input(props: InputProps) {
     value,
     changed = false,
     className,
-    isError = false,
+    error = "",
     width = "default",
     ...rest
   } = props;
   return (
-    <span>
-      <Label className="block" htmlFor={id}>
-        {label}
-      </Label>
-      <input
-        className={cx(
-          "border-solid border rounded p-1",
-          isError ? "border-red-500" : "border-slate-400",
-          { "bg-yellow-100": changed },
-          { "w-full": width === "full" },
-          className
-        )}
-        type="text"
-        id={id}
-        value={value}
-        onChange={onChange}
-        {...rest}
-      />
-    </span>
+    <div>
+      <span>
+        <Label className="block" htmlFor={id}>
+          {label}
+        </Label>
+        <input
+          className={cx(
+            "border-solid border rounded p-1",
+            error ? "border-red-500" : "border-slate-400",
+            { "bg-yellow-100": changed },
+            { "w-full": width === "full" },
+            className
+          )}
+          type="text"
+          id={id}
+          value={value}
+          onChange={onChange}
+          {...rest}
+        />
+      </span>
+      <p role="alert" className="text-red-500 h-4">
+        {error}
+      </p>
+    </div>
   );
 }

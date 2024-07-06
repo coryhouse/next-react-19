@@ -50,17 +50,16 @@ export function Todos({ todos }: TodosProps) {
         }}
         className="mt-4"
       >
+        <div className="flex grow-0 items-center">
         <Input
           id="title"
           label="What do you need to do?"
           type="text"
           name="title"
-          isError={!!addTodoFormState.titleError}
+            error={addTodoFormState.titleError}
         />
         <Button className="ml-2">Add</Button>
-        <p role="alert" className="text-red-500 h-4">
-          {addTodoFormState.titleError}
-          </p>
+        </div>
       </form>
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
