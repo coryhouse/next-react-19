@@ -34,7 +34,7 @@ export async function addTodo(
   formData: FormData
 ) {
   const title = formData.get("title");
-  if (!title) return { ...previousState, titleError: "Title is required" };
+  try {
     const resp = await fetch(baseUrl, {
     method: "POST",
     headers: {
@@ -43,6 +43,13 @@ export async function addTodo(
     body: JSON.stringify({ title, completed: false }),
   });
   await resp.json();
+    // Uncomment this to try out the error handling
+    throw new Error("Failed to add todo");
   revalidateTag("todos");
   return emptyAddToDoFormState;
+  } catch (error) {
+    return {
+      titleError: "Failed to add '" + title + "'.",
+    };
+  }
 }
