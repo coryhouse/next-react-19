@@ -5,7 +5,7 @@ import { todoSchema } from "@/types/todo";
 
 export default async function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center p-24">
+    <main className="grid h-screen place-content-center">
       <h1 className="text-xl font-bold">Todos</h1>
       <Suspense fallback={<Spinner />}>
         <FetchTodos />
