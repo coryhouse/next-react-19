@@ -49,8 +49,13 @@ export function Todos({ todos }: TodosProps) {
       <form
         ref={addTodoFormRef}
         action={(payload) => {
-          addOptimisticTodo(payload.get("title") as string);
+          const title = payload.get("title") as string;
+          if (title) {
+            // Only add optimistic todo if title is not empty.
+            // This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
+            addOptimisticTodo(title);
           addTodoFormRef.current?.reset(); // Clear form upon submit
+          }
           formAction(payload);
         }}
         className="mt-4"
