@@ -5,6 +5,7 @@ import { addTodo, deleteTodo } from "./actions";
 import { useOptimistic, useRef } from "react";
 import { useFormState } from "react-dom";
 import { Button } from "@/components/Button";
+import Input from "@/components/Input";
 
 type TodosProps = {
   todos: Todo[];
@@ -54,7 +55,9 @@ export function Todos({ todos }: TodosProps) {
         }}
         className="mt-4"
       >
-        <input
+        <Input
+          id="title"
+          label="What do you need to do?"
           type="text"
           name="title"
           className={`${
