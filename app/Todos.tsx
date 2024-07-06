@@ -64,7 +64,7 @@ export function Todos({ todos }: TodosProps) {
             state.titleError ? "border-red-500" : "border-gray-500"
           } border p-1`}
         />
-        <Button>Add</Button>
+        <Button className="ml-2">Add</Button>
         {state?.titleError && (
           <p role="alert" className="text-red-500">
             {state?.titleError}
