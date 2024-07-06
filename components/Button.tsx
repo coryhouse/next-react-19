@@ -1,7 +1,7 @@
 import { Spinner } from "./Spinner";
 import cx from "clsx";
 
-interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
   variant?: "primary" | "secondary" | "icon" | "expander";
 
   /** Setting this to true does the following:
