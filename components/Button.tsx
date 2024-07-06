@@ -1,7 +1,8 @@
 import { Spinner } from "./Spinner";
+import cx from "clsx";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode;
+interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
+  variant?: "primary" | "secondary" | "icon" | "expander";
 
   /** Setting this to true does the following:
    * - Display a loading spinner
@@ -16,24 +17,32 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
    * - Display the button a gray color
    * - Set aria-disabled to true
    * - Ignore clicks */
-  isDisabled?: boolean;
+  disabled?: boolean;
 }
 
 export function Button({
+  className,
+  variant = "primary",
   isLoading = false,
   loadingLabel = "",
-  isDisabled = false,
+  disabled = false,
   children,
   ...buttonProps
 }: ButtonProps) {
   return (
     <button
-      className="border p-1 bg-slate-200 border-gray-500 mr-2"
+      className={cx(className, "border border-slate-400 p-1 rounded", {
+        "bg-blue-600 text-white": variant === "primary",
+        "bg-white border-none p-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100":
+          variant === "icon",
+        "absolute inset-0 border-none inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:backdrop-brightness-90":
+          variant === "expander",
+      })}
       onClick={(e) => {
         if (isLoading) return;
         buttonProps.onClick?.(e);
       }}
-      aria-disabled={isLoading || isDisabled}
+      aria-disabled={isLoading || disabled}
       {...buttonProps}
     >
       {isLoading ? (
