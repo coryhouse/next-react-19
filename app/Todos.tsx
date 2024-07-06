@@ -6,6 +6,7 @@ import { useOptimistic, useRef } from "react";
 import { useFormState } from "react-dom";
 import { Button } from "@/components/Button";
 import Input from "@/components/Input";
+import DeleteButton from "@/components/DeleteButton";
 
 type TodosProps = {
   todos: Todo[];
