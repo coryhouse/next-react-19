@@ -32,20 +32,6 @@ export function Todos({ todos }: TodosProps) {
 
   return (
     <>
-      <ul>
-        {optimisticTodos.map((todo) => (
-          <li key={todo.id} className="flex">
-            <form action={deleteTodo}>
-              <input type="hidden" name="id" value={todo.id} />
-              <SubmitButton label="Delete" loadingLabel="Deleting..." />
-            </form>
-            {todo.title}
-            {todo.saving && (
-              <span className="text-sm text-slate-400 ml-2">Saving...</span>
-            )}
-          </li>
-        ))}
-      </ul>
       <form
         ref={addTodoFormRef}
         action={(payload) => {
