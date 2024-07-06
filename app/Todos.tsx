@@ -16,7 +16,10 @@ export function Todos({ todos }: TodosProps) {
   // Next.js docs still reference useFormState
   // On RSC apps, makes forms interactive before JavaScript has executed on the client.
   // When used without Server Components, is equivalent to component local state.
-  const [state, formAction] = useFormState(addTodo, emptyAddToDoFormState);
+  const [addTodoFormState, validateAddTodoAction] = useFormState(
+    validateAddTodo,
+    emptyAddToDoFormState
+  );
   const addTodoFormRef = useRef<HTMLFormElement>(null);
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(
     todos,
@@ -53,17 +56,15 @@ export function Todos({ todos }: TodosProps) {
           type="text"
           name="title"
           className={`${
-            state.titleError ? "border-red-500" : "border-gray-500"
+            addTodoFormState.titleError ? "border-red-500" : "border-gray-500"
           } border p-1`}
         />
         <Button className="ml-2">Add</Button>
-        {state?.titleError && (
-          <p role="alert" className="text-red-500">
-            {state?.titleError}
+        <p role="alert" className="text-red-500 h-4">
+          {addTodoFormState.titleError}
           </p>
-        )}
       </form>
-      <ul className="mt-4">
+      <ul className="mt-2">
         {optimisticTodos.map((todo) => (
           <li key={todo.id} className="flex items-center">
             <form action={deleteTodo}>
