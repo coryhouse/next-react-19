@@ -34,6 +34,7 @@ export async function addTodo(
   formData: FormData
 ) {
   const title = formData.get("title");
+  if (!title) return { titleError: "Title is required" };
   try {
     const resp = await fetch(baseUrl, {
     method: "POST",
