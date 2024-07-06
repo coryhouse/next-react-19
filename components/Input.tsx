@@ -16,6 +16,9 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 
   /** Specify input's width */
   width?: "full" | "default";
+
+  /** When true, the border is red instead of gray */
+  isError?: boolean;
 }
 
 export default function Input(props: InputProps) {
@@ -26,6 +29,7 @@ export default function Input(props: InputProps) {
     value,
     changed = false,
     className,
+    isError = false,
     width = "default",
     ...rest
   } = props;
@@ -36,7 +40,8 @@ export default function Input(props: InputProps) {
       </Label>
       <input
         className={cx(
-          "border-slate-400 border-solid border rounded p-1",
+          "border-solid border rounded p-1",
+          isError ? "border-red-500" : "border-slate-400",
           { "bg-yellow-100": changed },
           { "w-full": width === "full" },
           className

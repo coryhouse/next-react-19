@@ -55,9 +55,7 @@ export function Todos({ todos }: TodosProps) {
           label="What do you need to do?"
           type="text"
           name="title"
-          className={`${
-            addTodoFormState.titleError ? "border-red-500" : "border-gray-500"
-          } border p-1`}
+          isError={!!addTodoFormState.titleError}
         />
         <Button className="ml-2">Add</Button>
         <p role="alert" className="text-red-500 h-4">
