@@ -1,12 +1,11 @@
 "use client";
-import { Todo } from "@/types/todo";
-import { deleteTodo } from "./actions";
+import { Todo as TodoType } from "@/types/todo";
 import { useOptimistic } from "react";
-import DeleteButton from "@/components/DeleteButton";
 import { AddTodoForm } from "./AddTodoForm";
+import { Todo } from "./Todo";
 
 type TodosProps = {
-  todos: Todo[];
+  todos: TodoType[];
 };
 
 export function Todos({ todos }: TodosProps) {
@@ -28,24 +27,7 @@ export function Todos({ todos }: TodosProps) {
       <AddTodoForm addOptimisticTodo={addOptimisticTodo} />
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
-          <li key={todo.id} className="flex items-center">
-            <form action={deleteTodo}>
-              <input type="hidden" name="id" value={todo.id} />
-              <DeleteButton />
-            </form>
-            {/* <form ref={toggleFormRef} action={toggleComplete}>
-              <input
-                onChange={toggleFormRef.current?.submit}
-                type="checkbox"
-                name="id"
-                value={todo.id}
-              />
-            </form> */}
-            <span className="ml-2">{todo.title}</span>
-            {todo.saving && (
-              <span className="text-sm text-slate-400 ml-2">Saving...</span>
-            )}
-          </li>
+          <Todo key={todo.id} todo={todo} />
         ))}
       </ul>
     </>
