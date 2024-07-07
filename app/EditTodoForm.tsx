@@ -40,10 +40,12 @@ export function EditTodoForm({
         error={editFormState?.titleError}
         className="mr-2"
       />
-      <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
-      <Button variant="text" onClick={() => setIsEditing(false)}>
-        Cancel
-      </Button>
+      <div>
+        <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
+        <Button variant="text" onClick={() => setIsEditing(false)}>
+          Cancel
+        </Button>
+      </div>
     </form>
   ) : (
     <button
