@@ -18,7 +18,7 @@ export function Todo({ todo }: TodoProps) {
 
   return (
     <li
-      className={clsx("flex items-center", {
+      className={clsx("flex flex-row items-center", {
         "opacity-30": isPending,
         "pointer-events-none": isPending,
       })}
