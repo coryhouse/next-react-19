@@ -9,18 +9,29 @@ type TodoProps = {
 };
 
 export function Todo({ todo }: TodoProps) {
-  const [toggleIsPending, startTransition] = useTransition();
+  const [isTogglePending, startToggleTransition] = useTransition();
+  const [isDeletePending, startDeleteTransition] = useTransition();
+
+  const isPending = isTogglePending || isDeletePending;
 
   return (
-    <li key={todo.id} className="flex items-center">
-      <form action={deleteTodo}>
-        <input type="hidden" name="id" value={todo.id} />
-        <DeleteButton />
-      </form>
+    <li
+      key={todo.id}
+      className={clsx("flex items-center", {
+        "opacity-30": isPending,
+        "pointer-events-none": isPending,
+      })}
+    >
+      {/* Must useTransition instead of a form here so we can "see" the delete is in progress above. We would need a form tag for each todo, but the form would have to be above the ul for us to read the form's status via useFormStatus. And the <form> can't be a child of <ul>, because that's invalid HTML. Thus, useTransition is our only option here. */}
+      <DeleteButton
+        onClick={() => {
+          startDeleteTransition(() => deleteTodo(todo.id));
+        }}
+      />
       <input
         defaultChecked={todo.completed}
         onChange={() => {
-          startTransition(async () => {
+          startToggleTransition(async () => {
             await toggleComplete(todo.id, !todo.completed);
           });
         }}
@@ -31,7 +42,7 @@ export function Todo({ todo }: TodoProps) {
       <span className={clsx("ml-2", { "line-through": todo.completed })}>
         {todo.title}
       </span>
-      {(todo.saving || toggleIsPending) && (
+      {(todo.saving || isTogglePending) && (
         <span className="text-sm text-slate-400 ml-2">Saving...</span>
       )}
     </li>

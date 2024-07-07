@@ -6,9 +6,8 @@ import { revalidateTag } from "next/cache";
 // NOTE: The trailing slash is required for the fetch to work. Not sure why.
 const baseUrl = "http://localhost:3001/todos/";
 
-export async function deleteTodo(formData: FormData) {
-  const id = formData.get("id");
-  await fetch(baseUrl + id, {
+export async function deleteTodo(todoId: number) {
+  await fetch(baseUrl + todoId, {
     method: "DELETE",
   });
   revalidateTag("todos");
