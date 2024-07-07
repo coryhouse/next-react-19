@@ -35,7 +35,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
       <div className="flex grow-0 items-center">
         <Input
           id="title"
-          label="What do you need to do?"
+          label="Task"
           type="text"
           name="title"
           error={formState.titleError}
