@@ -9,7 +9,7 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
   name: string;
 
   /** Input label */
-  label: string;
+  label?: string;
 
   /** Set to true to highlight the label so that it is visually marked as changed from the default. */
   changed?: boolean;
@@ -36,9 +36,11 @@ export default function Input(props: InputProps) {
   return (
     <div>
       <span>
-        <Label className="block" htmlFor={id}>
-          {label}
-        </Label>
+        {label && (
+          <Label className="block" htmlFor={id}>
+            {label}
+          </Label>
+        )}
         <input
           className={cx(
             "border-solid border rounded p-1",
