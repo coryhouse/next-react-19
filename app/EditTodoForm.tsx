@@ -32,14 +32,18 @@ export function EditTodoForm({
 
   return isEditing ? (
     <form action={editTodoAction} className="flex grow-0">
+      <input type="hidden" name="id" value={todo.id} />
       <Input
         type="text"
+        name="title"
         defaultValue={todo.title}
         error={editFormState?.titleError}
         className="mr-2"
       />
-      <Button onClick={() => setIsEditing(false)}>Cancel</Button>
       <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
+      <Button variant="text" onClick={() => setIsEditing(false)}>
+        Cancel
+      </Button>
     </form>
   ) : (
     <button
