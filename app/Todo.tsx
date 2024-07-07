@@ -1,7 +1,7 @@
 import DeleteButton from "@/components/DeleteButton";
 import { deleteTodo, toggleComplete } from "./actions";
 import { Todo as TodoType } from "@/types/todo";
-import { startTransition, useTransition } from "react";
+import { useTransition } from "react";
 
 type TodoProps = {
   todo: TodoType;
