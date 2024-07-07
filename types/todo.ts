@@ -16,3 +16,11 @@ export const emptyAddToDoFormState: AddTodoFormState = {
 export type AddTodoFormState = {
   titleError: string;
 };
+
+export type EditTodoFormState = {
+  titleError: string;
+};
+
+export const emptyEditTodoFormState: EditTodoFormState = {
+  titleError: "",
+};
