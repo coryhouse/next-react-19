@@ -22,21 +22,26 @@ export function EditTodoForm({
     emptyEditTodoFormState
   );
 
-  if (isEditing)
+  if (todo.completed) {
     return (
-      <form action={editTodoAction} className="flex grow-0">
-        <Input
-          type="text"
-          defaultValue={todo.title}
-          error={editFormState?.titleError}
-          className="mr-2"
-        />
-        <Button onClick={() => setIsEditing(false)}>Cancel</Button>
-        <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
-      </form>
+      <span className={clsx("ml-2", { "line-through": todo.completed })}>
+        {todo.title}
+      </span>
     );
+  }
 
-  return (
+  return isEditing ? (
+    <form action={editTodoAction} className="flex grow-0">
+      <Input
+        type="text"
+        defaultValue={todo.title}
+        error={editFormState?.titleError}
+        className="mr-2"
+      />
+      <Button onClick={() => setIsEditing(false)}>Cancel</Button>
+      <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
+    </form>
+  ) : (
     <button
       onClick={() => setIsEditing(true)}
       className={clsx({ "line-through": todo.completed })}
