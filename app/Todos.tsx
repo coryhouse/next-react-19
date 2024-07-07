@@ -27,7 +27,7 @@ export function Todos({ todos }: TodosProps) {
       ...state,
       {
         completed: false,
-        id: state.length + 1,
+        id: state.length + 1, // TODO: Improve.
         title: newTodo,
         saving: true, // bool that tracks if the todo is currently in the process of saving
       },
