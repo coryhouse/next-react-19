@@ -24,7 +24,7 @@ export function EditTodoForm({
 
   if (todo.completed) {
     return (
-      <span className={clsx("ml-2", { "line-through": todo.completed })}>
+      <span className={clsx({ "line-through": todo.completed })}>
         {todo.title}
       </span>
     );
