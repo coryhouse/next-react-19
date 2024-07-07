@@ -28,7 +28,7 @@ export function Todo({ todo }: TodoProps) {
         name="id"
         value={todo.id}
       />
-      <span className={clsx(`ml-2`, { "line-through": todo.completed })}>
+      <span className={clsx("ml-2", { "line-through": todo.completed })}>
         {todo.title}
       </span>
       {(todo.saving || toggleIsPending) && (
