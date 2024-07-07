@@ -37,17 +37,17 @@ export async function addTodo(
   if (!title) return { titleError: "Title is required" };
   try {
     const resp = await fetch(baseUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ title, completed: false }),
-  });
-  await resp.json();
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, completed: false }),
+    });
+    await resp.json();
     // Uncomment this to try out the error handling
-    throw new Error("Failed to add todo");
-  revalidateTag("todos");
-  return emptyAddToDoFormState;
+    // throw new Error("Failed to add todo");
+    revalidateTag("todos");
+    return emptyAddToDoFormState;
   } catch (error) {
     return {
       titleError: "Failed to add '" + title + "'.",
