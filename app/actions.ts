@@ -14,9 +14,8 @@ export async function deleteTodo(formData: FormData) {
   revalidateTag("todos");
 }
 
-export async function toggleComplete(formData: FormData) {
-  const id = formData.get("id");
-  const resp = await fetch(baseUrl + id, {
+export async function toggleComplete(todoId: number) {
+  const resp = await fetch(baseUrl + todoId, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
