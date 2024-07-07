@@ -39,6 +39,7 @@ export function EditTodoForm({
         defaultValue={todo.title}
         error={editFormState?.titleError}
         className="mr-2"
+        onBlur={() => setIsEditing(false)}
       />
       <div>
         <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
@@ -52,7 +53,6 @@ export function EditTodoForm({
       type="text"
       defaultValue={todo.title}
       onFocus={() => setIsEditing(true)}
-      onBlur={() => setIsEditing(false)}
       error={editFormState?.titleError}
       className="border-none mr-2 bg-transparent"
     />
