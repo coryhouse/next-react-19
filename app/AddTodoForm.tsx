@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useRef } from "react";
 import { useFormState } from "react-dom";
-import { addTodo } from "./actions";
+import { addTodo } from "./todoActions";
 import { emptyAddToDoFormState } from "@/types/todo";
 
 type AddTodoFormProps = {
