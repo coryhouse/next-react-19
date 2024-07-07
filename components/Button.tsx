@@ -2,7 +2,7 @@ import { Spinner } from "./Spinner";
 import cx from "clsx";
 
 export interface ButtonProps extends React.ComponentPropsWithoutRef<"button"> {
-  variant?: "primary" | "secondary" | "icon" | "expander";
+  variant?: "primary" | "secondary" | "icon" | "text";
 
   /** Setting this to true does the following:
    * - Display a loading spinner
@@ -35,8 +35,7 @@ export function Button({
         "bg-blue-600 text-white": variant === "primary",
         "bg-white border-none p-1 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100":
           variant === "icon",
-        "absolute inset-0 border-none inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:backdrop-brightness-90":
-          variant === "expander",
+        "bg-inherit border-none text-gray-400": variant === "text",
       })}
       onClick={(e) => {
         if (isLoading) return;
