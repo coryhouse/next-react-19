@@ -14,13 +14,13 @@ export async function deleteTodo(formData: FormData) {
   revalidateTag("todos");
 }
 
-export async function toggleComplete(todoId: number) {
+export async function toggleComplete(todoId: number, completed: boolean) {
   const resp = await fetch(baseUrl + todoId, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ completed: true }),
+    body: JSON.stringify({ completed }),
   });
   await resp.json();
   revalidateTag("todos");
