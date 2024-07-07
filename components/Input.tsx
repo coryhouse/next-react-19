@@ -13,6 +13,9 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 
   /** Validation error to display below the input. When provided, the input is also styled in red. */
   error?: string;
+
+  /** Display content inline after the input */
+  afterSlot?: React.ReactNode;
 }
 
 export default function Input(props: InputProps) {
@@ -25,6 +28,7 @@ export default function Input(props: InputProps) {
     className,
     error = "",
     width = "default",
+    afterSlot,
     ...rest
   } = props;
   return (
@@ -48,6 +52,7 @@ export default function Input(props: InputProps) {
         onChange={onChange}
         {...rest}
       />
+      {afterSlot}
     </div>
   );
 }

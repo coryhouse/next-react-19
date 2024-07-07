@@ -32,16 +32,14 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
       }}
       className="mt-4"
     >
-      <div className="flex grow-0 items-center">
-        <Input
-          id="title"
-          label="Task"
-          type="text"
-          name="title"
-          error={formState.titleError}
-        />
-        <Button className="ml-2">Add</Button>
-      </div>
+      <Input
+        id="title"
+        label="Task"
+        type="text"
+        name="title"
+        error={formState.titleError}
+        afterSlot={<Button className="ml-2">Add</Button>}
+      />
       <p role="alert" className="text-red-500 h-4">
         {formState.titleError}
       </p>
