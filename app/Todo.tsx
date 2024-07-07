@@ -26,8 +26,8 @@ export function Todo({ todo }: TodoProps) {
       {/* Must useTransition instead of a form here so we can "see" the delete is in progress above. We would need a form tag for each todo, but the form would have to be above the ul for us to read the form's status via useFormStatus. And the <form> can't be a child of <ul>, because that's invalid HTML. Thus, useTransition is our only option here. */}
       <DeleteButton
         onClick={() => {
+          setIsEditing(false);
           startDeleteTransition(() => {
-            setIsEditing(false);
             deleteTodo(todo.id);
           });
         }}
@@ -36,8 +36,8 @@ export function Todo({ todo }: TodoProps) {
         className="mr-2"
         defaultChecked={todo.completed}
         onChange={() => {
+          setIsEditing(false);
           startToggleTransition(() => {
-            setIsEditing(false);
             toggleComplete(todo.id, !todo.completed);
           });
         }}
@@ -55,6 +55,9 @@ export function Todo({ todo }: TodoProps) {
       {(todo.saving || isTogglePending) && (
         <span className="text-sm text-slate-400 ml-2">Saving...</span>
       )}
+      {/* <p aria-live="polite" className="sr-only" role="status">
+        {state?.message}
+      </p> */}
     </li>
   );
 }
