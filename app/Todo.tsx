@@ -29,6 +29,7 @@ export function Todo({ todo }: TodoProps) {
         }}
       />
       <input
+        className="mr-2"
         defaultChecked={todo.completed}
         onChange={() => {
           startToggleTransition(async () => {
