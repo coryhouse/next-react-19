@@ -1,7 +1,8 @@
 import DeleteButton from "@/components/DeleteButton";
-import { deleteTodo, toggleComplete } from "./actions";
+import { deleteTodo, toggleComplete } from "./todoActions";
 import { Todo as TodoType } from "@/types/todo";
 import { useTransition } from "react";
+import clsx from "clsx";
 
 type TodoProps = {
   todo: TodoType;
@@ -27,7 +28,9 @@ export function Todo({ todo }: TodoProps) {
         name="id"
         value={todo.id}
       />
-      <span className="ml-2">{todo.title}</span>
+      <span className={clsx(`ml-2`, { "line-through": todo.completed })}>
+        {todo.title}
+      </span>
       {(todo.saving || toggleIsPending) && (
         <span className="text-sm text-slate-400 ml-2">Saving...</span>
       )}
