@@ -21,7 +21,7 @@ export function Todo({ todo }: TodoProps) {
         defaultChecked={todo.completed}
         onChange={() => {
           startTransition(async () => {
-            await toggleComplete(todo.id);
+            await toggleComplete(todo.id, !todo.completed);
           });
         }}
         type="checkbox"
