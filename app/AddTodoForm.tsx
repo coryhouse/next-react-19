@@ -42,6 +42,9 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         />
         <Button className="ml-2">Add</Button>
       </div>
+      <p role="alert" className="text-red-500 h-4">
+        {formState.titleError}
+      </p>
     </form>
   );
 }
