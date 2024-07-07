@@ -48,11 +48,13 @@ export function EditTodoForm({
       </div>
     </form>
   ) : (
-    <button
-      onClick={() => setIsEditing(true)}
-      className={clsx({ "line-through": todo.completed })}
-    >
-      {todo.title}
-    </button>
+    <Input
+      type="text"
+      defaultValue={todo.title}
+      onFocus={() => setIsEditing(true)}
+      onBlur={() => setIsEditing(false)}
+      error={editFormState?.titleError}
+      className="border-none mr-2 bg-transparent"
+    />
   );
 }
