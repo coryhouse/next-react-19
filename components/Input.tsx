@@ -2,12 +2,6 @@ import cx from "clsx";
 import Label from "./Label";
 
 interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
-  /** Input ID - Specifying here so it's required by TypeScript */
-  id: string;
-
-  /** Input name - Specifying here so it's required by TypeScript */
-  name: string;
-
   /** Input label */
   label?: string;
 
