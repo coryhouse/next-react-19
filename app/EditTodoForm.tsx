@@ -3,7 +3,6 @@ import { useFormState } from "react-dom";
 import { editTodo } from "./todoActions";
 import { Button } from "@/components/Button";
 import { SubmitButton } from "@/components/SubmitButton";
-import clsx from "clsx";
 import Input from "@/components/Input";
 
 type EditTodoFormProps = {
@@ -24,9 +23,13 @@ export function EditTodoForm({
 
   if (todo.completed) {
     return (
-      <span className={clsx({ "line-through": todo.completed })}>
-        {todo.title}
-      </span>
+      <Input
+        type="text"
+        disabled
+        defaultValue={todo.title}
+        error={editFormState?.titleError}
+        className="border-none mr-2 bg-transparent line-through"
+      />
     );
   }
 
