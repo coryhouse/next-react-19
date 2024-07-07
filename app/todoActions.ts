@@ -1,10 +1,44 @@
 "use server";
 
-import { AddTodoFormState, emptyAddToDoFormState } from "@/types/todo";
+import {
+  AddTodoFormState,
+  EditTodoFormState,
+  emptyAddToDoFormState,
+} from "@/types/todo";
 import { revalidateTag } from "next/cache";
+import { z } from "zod";
 
 // NOTE: The trailing slash is required for the fetch to work. Not sure why.
 const baseUrl = "http://localhost:3001/todos/";
+
+export async function editTodo(
+  currentState: EditTodoFormState,
+  formData: FormData
+) {
+  const editSchema = z.object({
+    title: z.string(),
+    id: z.coerce.number(),
+  });
+
+  const { id, title } = editSchema.parse(Object.fromEntries(formData));
+
+  try {
+    const resp = await fetch(baseUrl + id, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title }),
+    });
+    await resp.json();
+    revalidateTag("todos");
+    return null;
+  } catch (error) {
+    return {
+      titleError: "Failed to edit '" + title + "'.",
+    };
+  }
+}
 
 export async function deleteTodo(todoId: number) {
   await fetch(baseUrl + todoId, {
