@@ -29,30 +29,25 @@ export default function Input(props: InputProps) {
   } = props;
   return (
     <div>
-      <span>
-        {label && (
-          <Label className="block" htmlFor={id}>
-            {label}
-          </Label>
+      {label && (
+        <Label className="block" htmlFor={id}>
+          {label}
+        </Label>
+      )}
+      <input
+        className={cx(
+          "border-solid border rounded p-1",
+          error ? "border-red-500" : "border-slate-400",
+          { "bg-yellow-100": changed },
+          { "w-full": width === "full" },
+          className
         )}
-        <input
-          className={cx(
-            "border-solid border rounded p-1",
-            error ? "border-red-500" : "border-slate-400",
-            { "bg-yellow-100": changed },
-            { "w-full": width === "full" },
-            className
-          )}
-          type="text"
-          id={id}
-          value={value}
-          onChange={onChange}
-          {...rest}
-        />
-      </span>
-      <p role="alert" className="text-red-500 h-4">
-        {error}
-      </p>
+        type="text"
+        id={id}
+        value={value}
+        onChange={onChange}
+        {...rest}
+      />
     </div>
   );
 }
