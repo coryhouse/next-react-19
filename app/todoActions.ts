@@ -22,6 +22,8 @@ export async function editTodo(
 
   const { id, title } = editSchema.parse(Object.fromEntries(formData));
 
+  if (!title) return { titleError: "Title is required" };
+
   try {
     const resp = await fetch(baseUrl + id, {
       method: "PATCH",
