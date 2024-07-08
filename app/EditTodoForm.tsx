@@ -38,10 +38,8 @@ export function EditTodoForm({
   if (todo.completed) {
     return (
       <Input
-        type="text"
         disabled
         defaultValue={todo.title}
-        error={editFormState?.titleError}
         className={clsx(readOnlyInputStyles, "line-through")}
       />
     );
@@ -51,7 +49,6 @@ export function EditTodoForm({
     <form action={editTodoAction} className="flex grow-0">
       <input type="hidden" name="id" value={todo.id} />
       <Input
-        type="text"
         name="title"
         defaultValue={todo.title}
         error={editFormState?.titleError}
@@ -62,10 +59,8 @@ export function EditTodoForm({
   ) : (
     <>
       <Input
-        type="text"
         defaultValue={todo.title}
         onFocus={() => setIsEditing(true)}
-        error={editFormState?.titleError}
         className={readOnlyInputStyles}
       />
       {submitButtons(false)}
