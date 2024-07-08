@@ -49,6 +49,7 @@ export function EditTodoForm({
     <form action={editTodoAction} className="flex grow-0">
       <input type="hidden" name="id" value={todo.id} />
       <Input
+        autofocusOnFirstRender
         name="title"
         defaultValue={todo.title}
         error={editFormState?.titleError}
