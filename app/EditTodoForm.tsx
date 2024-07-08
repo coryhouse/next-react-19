@@ -4,12 +4,15 @@ import { editTodo } from "./todoActions";
 import { Button } from "@/components/Button";
 import { SubmitButton } from "@/components/SubmitButton";
 import Input from "@/components/Input";
+import clsx from "clsx";
 
 type EditTodoFormProps = {
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
   todo: Todo;
 };
+
+const readOnlyInputStyles = "border-white bg-transparent";
 
 export function EditTodoForm({
   isEditing,
@@ -21,6 +24,17 @@ export function EditTodoForm({
     emptyEditTodoFormState
   );
 
+  function submitButtons(visible = true) {
+    return (
+      <div className={clsx(visible ? "" : "invisible", "ml-2")}>
+        <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
+        <Button variant="text" onClick={() => setIsEditing(false)}>
+          Cancel
+        </Button>
+      </div>
+    );
+  }
+
   if (todo.completed) {
     return (
       <Input
@@ -28,7 +42,7 @@ export function EditTodoForm({
         disabled
         defaultValue={todo.title}
         error={editFormState?.titleError}
-        className="border-none mr-2 bg-transparent line-through"
+        className={clsx(readOnlyInputStyles, "line-through")}
       />
     );
   }
@@ -41,23 +55,20 @@ export function EditTodoForm({
         name="title"
         defaultValue={todo.title}
         error={editFormState?.titleError}
-        className="mr-2"
         onBlur={() => setIsEditing(false)}
       />
-      <div>
-        <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
-        <Button variant="text" onClick={() => setIsEditing(false)}>
-          Cancel
-        </Button>
-      </div>
+      {submitButtons()}
     </form>
   ) : (
-    <Input
-      type="text"
-      defaultValue={todo.title}
-      onFocus={() => setIsEditing(true)}
-      error={editFormState?.titleError}
-      className="border-none mr-2 bg-transparent"
-    />
+    <>
+      <Input
+        type="text"
+        defaultValue={todo.title}
+        onFocus={() => setIsEditing(true)}
+        error={editFormState?.titleError}
+        className={readOnlyInputStyles}
+      />
+      {submitButtons(false)}
+    </>
   );
 }
