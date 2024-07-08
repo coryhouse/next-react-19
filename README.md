@@ -1,3 +1,13 @@
+## TODO:
+
+- [ ] Add devtools and force errors
+- [ ] Add tests that prove the errors work
+- [ ] Support delay via URL param
+- [ ] Add login and other missing Switchboard features
+- [ ] Use React query to fetch data
+- [ ] Add navigation
+- [ ] Use DB like Sqlite or Postgres
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
