@@ -1,5 +1,6 @@
 import cx from "clsx";
 import Label from "./Label";
+import { useEffect, useRef } from "react";
 
 interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
   /** Input label */
@@ -16,6 +17,9 @@ interface InputProps extends React.ComponentPropsWithoutRef<"input"> {
 
   /** Display content inline after the input */
   afterSlot?: React.ReactNode;
+
+  /** Set to true to autofocus the input on the first render */
+  autofocusOnFirstRender?: boolean;
 }
 
 export default function Input(props: InputProps) {
@@ -29,8 +33,19 @@ export default function Input(props: InputProps) {
     error = "",
     width = "default",
     afterSlot,
+    onClick,
+    autofocusOnFirstRender,
     ...rest
   } = props;
+
+  const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (props.autofocusOnFirstRender) {
+      ref.current?.focus();
+    }
+  }, [props.autofocusOnFirstRender]);
+
   return (
     <div>
       {label && (
@@ -39,6 +54,7 @@ export default function Input(props: InputProps) {
         </Label>
       )}
       <input
+        ref={ref}
         className={cx(
           "border-solid border rounded p-1",
           error ? "border-red-500" : "border-slate-400",
