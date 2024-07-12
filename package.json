@@ -10,6 +10,7 @@
     "json-server": "json-server --watch db.json --port 3001 --delay 1000"
   },
   "dependencies": {
+    "@applitools/eyes-playwright": "^1.28.2",
     "clsx": "^2.1.1",
     "concurrently": "^8.2.2",
     "json-server": "0.17.4",
@@ -19,6 +20,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@playwright/test": "^1.45.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
