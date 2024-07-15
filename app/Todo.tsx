@@ -4,6 +4,7 @@ import { Todo as TodoType } from "@/types/todo";
 import { useState, useTransition } from "react";
 import clsx from "clsx";
 import { EditTodoForm } from "./EditTodoForm";
+import { toast } from "sonner";
 
 type TodoProps = {
   todo: TodoType;
@@ -28,8 +29,9 @@ export function Todo({ todo }: TodoProps) {
         aria-label={`Delete ${todo.title}`}
         onClick={() => {
           setIsEditing(false);
-          startDeleteTransition(() => {
-            deleteTodo(todo.id);
+          startDeleteTransition(async () => {
+            await deleteTodo(todo.id);
+            toast.success("Todo deleted");
           });
         }}
       />
