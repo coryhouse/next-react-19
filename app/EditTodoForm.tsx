@@ -53,9 +53,8 @@ export function EditTodoForm({
         name="title"
         defaultValue={todo.title}
         error={editFormState?.titleError}
-        onBlur={() => setIsEditing(false)}
       />
-      {submitButtons()}
+      <SubmitButtons setIsEditing={setIsEditing} isEditing />
     </form>
   ) : (
     <>
@@ -64,7 +63,11 @@ export function EditTodoForm({
         onFocus={() => setIsEditing(true)}
         className={readOnlyInputStyles}
       />
-      {submitButtons(false)}
+      <SubmitButtons
+        visible={false}
+        setIsEditing={setIsEditing}
+        isEditing={false}
+      />
     </>
   );
 }
