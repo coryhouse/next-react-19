@@ -23,17 +23,6 @@ export function EditTodoForm({
     emptyEditTodoFormState
   );
 
-  function submitButtons(visible = true) {
-    return (
-      <div className={clsx(visible ? "" : "invisible", "ml-2")}>
-        <SubmitButton loadingLabel="Saving...">Save</SubmitButton>
-        <Button variant="text" onClick={() => setIsEditing(false)}>
-          Cancel
-        </Button>
-      </div>
-    );
-  }
-
   if (todo.completed) {
     return (
       <Input
