@@ -1,10 +1,9 @@
 import { emptyEditTodoFormState, Todo } from "@/types/todo";
 import { useFormState } from "react-dom";
 import { editTodo } from "./todoActions";
-import { Button } from "@/components/Button";
-import { SubmitButton } from "@/components/SubmitButton";
 import Input from "@/components/Input";
 import clsx from "clsx";
+import { SaveAndCancelButtons } from "./SaveAndCancelButtons";
 
 type EditTodoFormProps = {
   isEditing: boolean;
@@ -54,7 +53,7 @@ export function EditTodoForm({
         defaultValue={todo.title}
         error={editFormState?.titleError}
       />
-      <SubmitButtons setIsEditing={setIsEditing} isEditing />
+      <SaveAndCancelButtons setIsEditing={setIsEditing} isEditing />
     </form>
   ) : (
     <>
@@ -63,7 +62,7 @@ export function EditTodoForm({
         onFocus={() => setIsEditing(true)}
         className={readOnlyInputStyles}
       />
-      <SubmitButtons
+      <SaveAndCancelButtons
         visible={false}
         setIsEditing={setIsEditing}
         isEditing={false}
