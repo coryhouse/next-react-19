@@ -8,7 +8,10 @@ export function Nav() {
     <nav className="bg-slate-500 p-4 text-white flex justify-between">
       <ul className="flex">
         <li className="mr-4">
-          <Link href="/">Todos</Link>
+          <Link href="/">Home</Link>
+        </li>
+        <li className="mr-4">
+          <Link href="/todos">Todos</Link>
         </li>
         <li className="mr-4">
           <Link href="/blog">Blog</Link>
