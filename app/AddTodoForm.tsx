@@ -1,7 +1,6 @@
 import { Button } from "@/components/Button";
 import Input from "@/components/Input";
-import { useRef } from "react";
-import { useFormState } from "react-dom";
+import { useActionState, useRef } from "react";
 import { addTodo } from "./todoActions";
 import { emptyAddToDoFormState } from "@/types/todo";
 
@@ -10,8 +9,8 @@ type AddTodoFormProps = {
 };
 
 export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
-  // Next.js docs still reference useFormState. On RSC apps, useFormState makes forms interactive before JavaScript has executed on the client. When used without Server Components, is equivalent to component local state.
-  const [formState, addTodoAction] = useFormState(
+  // On RSC apps, useActionState makes forms interactive before JavaScript has executed on the client. When used without Server Components, is equivalent to component local state.
+  const [formState, addTodoAction, isPending] = useActionState(
     addTodo,
     emptyAddToDoFormState
   );
