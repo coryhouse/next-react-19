@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const todoSchema = z.object({
-  id: z.number(),
+  id: z.coerce.string(),
   title: z.string(),
   completed: z.boolean(),
   saving: z.boolean().optional(),
