@@ -1,14 +1,4 @@
-## TODO:
-
-- [ ] Add devtools and force errors
-- [ ] Add tests that prove the errors work
-- [ ] Support delay via URL param
-- [ ] Add login and other missing Switchboard features
-- [ ] Use React query to fetch data
-- [ ] Add navigation
-- [ ] Use DB like Sqlite or Postgres
-
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
@@ -16,31 +6,37 @@ First, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## New features
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [x] React Server Components - Components that render at build time, or for each request.
+- [ ] Actions - Functions that use async transitions and automatically submit data for you. Actions support error handling, optimistic updates, and pending state.
+- [x] Full custom element support
+- [x] Document metadata support - Render title, link, and meta tags and they automatically hoist. (See Vite, since Next has its own metadata API)
+- [ ] Stylesheet precedence settings
+- [ ] Render async scripts in any component - They're automatically deduplicated
+- [ ] Preload resources via prefetchDNS, preconnect, preload, preinit
+- [ ] Unexpected tags in <head> and <body> are skipped - improves third-party script compatibility and avoids mismatch errors
+- [ ] Better error reporting - Automatically removes duplicate errors. Added onCaughtError and onUncaughtError root options.
 
-## Learn More
+## New directives
 
-To learn more about Next.js, take a look at the following resources:
+- [x] 'use client' - marks code that runs only on the client.
+- [ ] 'use server' - marks server-side functions that can be called from client-side code.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## New APIs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [x] use - Read resources (like promises and context) in render.
+- [ ] ref prop - refs are finally just a plain prop!
+- [ ] ref callback cleanup – ref callbacks can return an optional cleanup function.
+- [ ] Streamlined Context - Use <Context> instead of <Context.Provider>
+- [ ] useDeferredValue - Now accepts an initial value too.
 
-## Deploy on Vercel
+## New hooks
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [ ] useActionState - Declare form state and degrade gracefully if JS hasn't executed yet.
+- [ ] useFormStatus - Get a form's status.
+- [ ] useOptimistic - Show the final state optimistically while an async request is underway.
