@@ -1,9 +1,9 @@
 import { emptyEditTodoFormState, Todo } from "@/types/todo";
-import { useFormState } from "react-dom";
 import { editTodo } from "./todoActions";
 import Input from "@/components/Input";
 import clsx from "clsx";
 import { SaveAndCancelButtons } from "./SaveAndCancelButtons";
+import { useActionState } from "react";
 
 type EditTodoFormProps = {
   isEditing: boolean;
@@ -18,7 +18,7 @@ export function EditTodoForm({
   setIsEditing,
   todo,
 }: EditTodoFormProps) {
-  const [editFormState, editTodoAction] = useFormState(
+  const [editFormState, editTodoAction, isPending] = useActionState(
     editTodo,
     emptyEditTodoFormState
   );
@@ -34,7 +34,7 @@ export function EditTodoForm({
   }
 
   return isEditing ? (
-    <form action={editTodoAction} className="flex grow-0">
+    <form action={editTodoAction} className="flex flex-row items-center grow-0">
       <input type="hidden" name="id" value={todo.id} />
       <Input
         autofocusOnFirstRender
