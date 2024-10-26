@@ -15,5 +15,30 @@
       "title": "Learn React Router",
       "completed": false
     }
-  ]
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "React 19: The New Stuff",
+      "body": "This post introduces the new React 19 features.",
+      "author": "Cory House"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "Seems nice!",
+      "postId": 1
+    }
+  ],
+  "contacts": [
+    {
+      "id": 1,
+      "subject": "Support",
+      "body": "I need help with my account."
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
 }
