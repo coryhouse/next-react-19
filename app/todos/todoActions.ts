@@ -42,7 +42,7 @@ export async function editTodo(
   }
 }
 
-export async function deleteTodo(todoId: number) {
+export async function deleteTodo(todoId: string) {
   await fetch(baseUrl + todoId, {
     method: "DELETE",
   });
