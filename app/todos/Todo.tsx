@@ -5,6 +5,7 @@ import { useState, useTransition } from "react";
 import clsx from "clsx";
 import { EditTodoForm } from "./EditTodoForm";
 import { toast } from "sonner";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 type TodoProps = {
   todo: TodoType;
@@ -55,9 +56,7 @@ export function Todo({ todo }: TodoProps) {
         todo={todo}
       />
 
-      {(todo.saving || isTogglePending) && (
-        <span className="text-sm text-slate-400 ml-2">Saving...</span>
-      )}
+      {(todo.saving || isPending) && <LoadingIndicator />}
       {/* <p aria-live="polite" className="sr-only" role="status">
         {state?.message}
       </p> */}
