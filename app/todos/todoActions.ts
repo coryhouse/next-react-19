@@ -49,7 +49,7 @@ export async function deleteTodo(todoId: string) {
   revalidateTag("todos");
 }
 
-export async function toggleComplete(todoId: number, completed: boolean) {
+export async function toggleComplete(todoId: string, completed: boolean) {
   const resp = await fetch(baseUrl + todoId, {
     method: "PATCH",
     headers: {
