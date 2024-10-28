@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import clsx from "clsx";
 import { useRef } from "react";
 import { useFormStatus } from "react-dom";
+import LoadingIndicator from "../components/LoadingIndicator";
 
 type SaveAndCancelButtonsProps = {
   visible?: boolean;
@@ -28,7 +29,7 @@ export function SaveAndCancelButtons({
   //   }, [isEditing, pending, setIsEditing]);
 
   if (pending) {
-    return <div className="ml-2 text-sm text-slate-400">Saving...</div>;
+    return <LoadingIndicator />;
   }
 
   return (
