@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## New directives
 
 - [x] 'use client' - marks code that runs only on the client.
-- [ ] 'use server' - marks server-side functions that can be called from client-side code.
+- [x] 'use server' - marks server-side functions that can be called from client-side code.
 
 ## New APIs
 
@@ -38,5 +38,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## New hooks
 
 - [ ] useActionState - Declare form state and degrade gracefully if JS hasn't executed yet.
-- [ ] useFormStatus - Get a form's status.
-- [ ] useOptimistic - Show the final state optimistically while an async request is underway.
+- [x] useFormStatus - Get a form's status.
+- [x] useOptimistic - Show the final state optimistically while an async request is underway.
