@@ -6,6 +6,7 @@ import { todoSchema } from "@/types/todo";
 export default async function Home() {
   return (
     <main className="grid place-content-center mt-4">
+      <title>Todos</title>
       <h1 className="text-xl font-bold">Todos</h1>
       <Suspense fallback={<Spinner />}>
         <FetchTodos />

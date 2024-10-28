@@ -18,6 +18,7 @@ export default async function Home() {
   return (
     <>
       <h1 className="text-xl">{post.title}</h1>
+      <title>{post.title}</title>
       <p>{post.body}</p>
       <Suspense fallback={<div>Loading comments...</div>}>
         <Comments commentsPromise={commentsPromise} />
