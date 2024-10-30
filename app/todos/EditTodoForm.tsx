@@ -25,6 +25,9 @@ export function EditTodoForm({
   );
   const formRef = useRef<HTMLFormElement>(null);
 
+  const formResetKey =
+    formState.status === "success" ? formState.resetKey : undefined;
+
   // 3 ways to handle updating form state after submit
   // 1. useEffect with resetKey returned from the action (timestamp) as suggested here: https://stackoverflow.com/a/78249448/26180
   useEffect(() => {
@@ -32,7 +35,7 @@ export function EditTodoForm({
       formRef.current?.reset();
       setIsEditing(false);
     }
-  }, [formState.resetKey, formState.status]);
+  }, [formState.status, formResetKey]);
 
   // 2. formRef
   // Could just handle via JS instead of useActionState since our fancy form requires JS to function anyway
@@ -63,7 +66,9 @@ export function EditTodoForm({
         autofocusOnFirstRender
         name="title"
         defaultValue={todo.title}
-        error={formState?.titleError}
+        error={
+          formState.status === "error" ? formState.errors.title : undefined
+        }
       />
       <div className="ml-2">
         <Button type="submit">{isPending ? "Saving..." : "Save"}</Button>
