@@ -14,7 +14,7 @@ const baseUrl = "http://localhost:3001/todos/";
 export async function editTodo(
   currentState: EditTodoFormState,
   formData: FormData
-) {
+): Promise<EditTodoFormState> {
   const editSchema = z.object({
     title: z.string(),
     id: z.coerce.number(),
@@ -22,7 +22,7 @@ export async function editTodo(
 
   const { id, title } = editSchema.parse(Object.fromEntries(formData));
 
-  if (!title) return { titleError: "Title is required" };
+  if (!title) return { titleError: "Title is required", status: "error" };
 
   try {
     const resp = await fetch(baseUrl + id, {
@@ -34,10 +34,11 @@ export async function editTodo(
     });
     await resp.json();
     revalidateTag("todos");
-    return null;
+    return { status: "success", resetKey: new Date().toString() };
   } catch (error) {
     return {
       titleError: "Failed to edit '" + title + "'.",
+      status: "error",
     };
   }
 }
