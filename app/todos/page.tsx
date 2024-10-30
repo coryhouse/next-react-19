@@ -18,7 +18,6 @@ export default async function Home() {
 async function FetchTodos() {
   // NOTE: The trailing slash is required for the fetch to work
   const resp = await fetch("http://localhost:3001/todos/", {
-    cache: "no-store",
     next: { tags: ["todos"] },
   });
   const todos = todoSchema.array().parse(await resp.json());
