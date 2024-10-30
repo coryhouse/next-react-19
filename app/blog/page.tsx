@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Post } from "../types";
-import { CustomButtonWrapper } from "../components/CustomButton";
+import { CustomButtonWrapper } from "@/components/CustomButton";
 import { Comments } from "./comments";
 
 const postId = 1;
