@@ -41,8 +41,9 @@ export function Todo({ todo }: TodoProps) {
         defaultChecked={todo.completed}
         onChange={() => {
           setIsEditing(false);
-          startToggleTransition(() => {
-            toggleComplete(todo.id, !todo.completed);
+          startToggleTransition(async () => {
+            await toggleComplete(todo.id, !todo.completed);
+            toast.success("Todo toggled");
           });
         }}
         type="checkbox"
