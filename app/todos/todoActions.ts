@@ -22,7 +22,8 @@ export async function editTodo(
 
   const { id, title } = editSchema.parse(Object.fromEntries(formData));
 
-  if (!title) return { titleError: "Title is required", status: "error" };
+  if (!title)
+    return { errors: { title: "Title is required" }, status: "error" };
 
   try {
     const resp = await fetch(baseUrl + id, {
@@ -37,7 +38,7 @@ export async function editTodo(
     return { status: "success", resetKey: new Date().toString() };
   } catch (error) {
     return {
-      titleError: "Failed to edit '" + title + "'.",
+      errors: { title: "Failed to edit '" + title + "'." },
       status: "error",
     };
   }

@@ -17,10 +17,21 @@ export type AddTodoFormState = {
   titleError: string;
 };
 
-export type EditTodoFormState = {
-  titleError: string;
-};
+export type EditTodoFormState =
+  | {
+      status: "idle";
+    }
+  | {
+      status: "success";
+      resetKey: string;
+    }
+  | {
+      status: "error";
+      errors: {
+        title: string;
+      };
+    };
 
 export const emptyEditTodoFormState: EditTodoFormState = {
-  titleError: "",
+  status: "idle",
 };
