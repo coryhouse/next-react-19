@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import clsx from "clsx";
 import { useRef } from "react";
 import { useFormStatus } from "react-dom";
-import LoadingIndicator from "../components/LoadingIndicator";
+import LoadingIndicator from "@/components/LoadingIndicator";
 
 type SaveAndCancelButtonsProps = {
   visible?: boolean;

@@ -5,7 +5,7 @@ import { useState, useTransition } from "react";
 import clsx from "clsx";
 import { EditTodoForm } from "./EditTodoForm";
 import { toast } from "sonner";
-import LoadingIndicator from "../components/LoadingIndicator";
+import LoadingIndicator from "@/components/LoadingIndicator";
 
 type TodoProps = {
   todo: TodoType;
