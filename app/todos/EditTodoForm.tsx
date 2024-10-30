@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { useActionState, useEffect, useRef } from "react";
 import { Button } from "@/components/Button";
 import LoadingIndicator from "@/components/LoadingIndicator";
+import { toast } from "sonner";
 
 type EditTodoFormProps = {
   isEditing: boolean;
@@ -28,12 +29,13 @@ export function EditTodoForm({
   const formResetKey =
     formState.status === "success" ? formState.resetKey : undefined;
 
-  // 3 ways to handle updating form state after submit
+  // 4 ways to handle updating form state after submit when using useActionState
   // 1. useEffect with resetKey returned from the action (timestamp) as suggested here: https://stackoverflow.com/a/78249448/26180
   useEffect(() => {
     if (formState.status === "success") {
       formRef.current?.reset();
       setIsEditing(false);
+      toast.success("Todo saved.");
     }
   }, [formState.status, formResetKey]);
 
@@ -43,7 +45,9 @@ export function EditTodoForm({
   //   setIsEditing(false);
   // }
 
-  // 3. Just useTransition instead of useActionState since the form requires JS to function anyway. https://stackoverflow.com/a/78249448/26180
+  // 3. Handle async logic in the form action. (See AddToDoForm)
+
+  // 4. Don't useActionState. Just useTransition instead of useActionState since the form requires JS to function anyway. https://stackoverflow.com/a/78249448/26180
 
   if (todo.completed) {
     return (
