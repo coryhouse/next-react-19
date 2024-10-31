@@ -36,7 +36,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         label="Task"
         type="text"
         name="title"
-        error={formState.titleError}
+        error={isPending ? undefined : formState.titleError}
         afterSlot={
           <Button type="submit" className="ml-2">
             Add
@@ -44,7 +44,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         }
       />
       <p role="alert" className="text-red-500 h-4">
-        {formState.titleError}
+        {!isPending && formState.titleError}
       </p>
     </form>
   );
