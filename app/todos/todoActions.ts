@@ -36,6 +36,7 @@ export async function editTodo(
     await resp.json();
     revalidateTag("todos");
     return { status: "success", resetKey: new Date().toString() };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     return {
       errors: { title: "Failed to edit '" + title + "'." },
@@ -84,7 +85,8 @@ export async function addTodo(
     // throw new Error("Failed to add todo");
     revalidateTag("todos");
     return emptyAddToDoFormState;
-  } catch (error) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (_error) {
     return {
       titleError: "Failed to add '" + title + "'.",
     };
