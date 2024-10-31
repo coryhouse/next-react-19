@@ -55,6 +55,9 @@ Problem: Want multiple form actionsSolution: put form action on button https://
 Problem: the form needs to submit to a different url and should work before hydration 
 Solution: provide a permalink to useActionState. This arg only applies before hydration.
 
+Problem: I want to immediately hide error state on a form upon submission.
+Solution: Hide validation errors when `isPending` from useActionState is true.
+
 Problem: Want to display an error if the forms action fails
 Solution: wrap form in error boundary.
 
