@@ -33,7 +33,6 @@ export default function Input(props: InputProps) {
     error = "",
     width = "default",
     afterSlot,
-    onClick,
     autofocusOnFirstRender,
     ...rest
   } = props;
