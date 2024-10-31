@@ -25,7 +25,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         if (title) {
           // Only add optimistic todo if title is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
           addOptimisticTodo(title);
-          formRef.current?.reset(); // Clear form upon submit
+          formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
         }
         addTodoAction(payload);
       }}
@@ -37,7 +37,11 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         type="text"
         name="title"
         error={formState.titleError}
-        afterSlot={<Button className="ml-2">Add</Button>}
+        afterSlot={
+          <Button type="submit" className="ml-2">
+            Add
+          </Button>
+        }
       />
       <p role="alert" className="text-red-500 h-4">
         {formState.titleError}
