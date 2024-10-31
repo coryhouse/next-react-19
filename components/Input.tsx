@@ -41,10 +41,10 @@ export default function Input(props: InputProps) {
   const ref = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (props.autofocusOnFirstRender) {
+    if (autofocusOnFirstRender) {
       ref.current?.focus();
     }
-  }, [props.autofocusOnFirstRender]);
+  }, [autofocusOnFirstRender]);
 
   return (
     <div>
