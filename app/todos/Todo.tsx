@@ -41,10 +41,10 @@ export function Todo({ todo }: TodoProps) {
         defaultChecked={todo.completed}
         onChange={() => {
           toast.success("Todo toggled");
-          startToggleTransition(async () => {
+          startToggleTransition(() => {
             setIsEditing(false);
-            await toggleComplete(todo.id, !todo.completed);
           });
+          toggleComplete(todo.id, !todo.completed);
         }}
         type="checkbox"
         name="id"
