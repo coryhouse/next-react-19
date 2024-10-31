@@ -12,6 +12,7 @@ export default function ContactPage() {
 
     try {
       await submitContact(formData);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setError("Failed to send message. Please try again.");
     }
