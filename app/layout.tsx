@@ -1,4 +1,3 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import { UserContextProvider } from "./user-context";
 import { Toaster } from "sonner";
