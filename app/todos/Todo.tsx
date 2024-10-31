@@ -30,9 +30,9 @@ export function Todo({ todo }: TodoProps) {
         aria-label={`Delete ${todo.title}`}
         onClick={() => {
           setIsEditing(false);
+          toast.success("Todo deleted");
           startDeleteTransition(async () => {
             await deleteTodo(todo.id);
-            toast.success("Todo deleted");
           });
         }}
       />
