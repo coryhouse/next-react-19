@@ -37,7 +37,7 @@ export function EditTodoForm({
       setIsEditing(false);
       toast.success("Todo saved.");
     }
-  }, [formState.status, formResetKey]);
+  }, [formState.status, formResetKey, setIsEditing]);
 
   // 2. formRef
   // Could just handle via JS instead of useActionState since our fancy form requires JS to function anyway
