@@ -77,11 +77,11 @@ Solution: Declare validation logic with form's action
 Problem: Want to support submitting a form before JS has executed (helps if slow connection, device, or JS disabled) And automatically reset the form when submitted. 
 Solution: Pass form a server action
 
-Problem: want to submit data on form that isn’t visible. 
+Problem: Want to submit data on form that isn’t visible. 
 Solution: Hidden form field is submitted with form.
 
 Problem: Want to render a component client side only and use client only features like hooks
-Solution: use client.
+Solution: 'use client'.
 
 Problem: Want to consume a context or promise.
 Solution: use
