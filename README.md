@@ -13,7 +13,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## New features
 
 - [x] React Server Components - Components that render at build time, or for each request.
-- [ ] Actions - Functions that use async transitions and automatically submit data for you. Actions support error handling, optimistic updates, and pending state.
+- [x] Actions - Functions that use async transitions and automatically submit data for you. Actions support error handling, optimistic updates, and pending state.
 - [x] Full custom element support
 - [x] Document metadata support - Render title, link, and meta tags and they automatically hoist. (See Vite, since Next has its own metadata API)
 - [ ] Stylesheet precedence settings
@@ -30,13 +30,63 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## New APIs
 
 - [x] use - Read resources (like promises and context) in render.
-- [ ] ref prop - refs are finally just a plain prop!
+- [x] ref prop - refs are finally just a plain prop!
 - [ ] ref callback cleanup – ref callbacks can return an optional cleanup function.
 - [ ] Streamlined Context - Use <Context> instead of <Context.Provider>
 - [ ] useDeferredValue - Now accepts an initial value too.
 
 ## New hooks
 
-- [ ] useActionState - Declare form state and degrade gracefully if JS hasn't executed yet.
+- [x] useActionState - Declare form state and degrade gracefully if JS hasn't executed yet.
 - [x] useFormStatus - Get a form's status.
 - [x] useOptimistic - Show the final state optimistically while an async request is underway.
+
+## Not in 19
+
+- [ ] React compiler
+
+## New features Problem, Solution quiz
+
+Problem: Slow UI feedback. Lack of rollback in case of error. Want to show new value before it’s actually saved on backend. 
+Solution: useOptimistic
+
+Problem: Want multiple form actionsSolution: put form action on button https://react.dev/reference/react-dom/components/form#handling-multiple-submission-types
+
+Problem: the form needs to submit to a different url and should work before hydration 
+Solution: provide a permalink to useActionState. This arg only applies before hydration.
+
+Problem: Want to display an error if the forms action fails
+Solution: wrap form in error boundary.
+
+Problem: Want to show pending state while form submit is processing
+Solution: useFormStatus
+
+Problem: Want to avoid declaring form state. Want to track server action status without separate state. 
+Solution: useActionState
+
+Problem: Want to expose a server function to the client.
+Solution: use server.
+
+Problem: Want to validate form input when using useActionState
+Solution: Declare validation logic with form's action
+
+Problem: Want to support submitting a form before JS has executed (helps if slow connection, device, or JS disabled) And automatically reset the form when submitted. 
+Solution: Pass form a server action
+
+Problem: want to submit data on form that isn’t visible. 
+Solution: Hidden form field is submitted with form.
+
+Problem: Want to render a component client side only and use client only features like hooks
+Solution: use client.
+
+Problem: Want to consume a context or promise.
+Solution: use
+
+Problem: Want to declare meta tags
+Solution: Just render.
+
+Problem: css priority.
+Solution: render link anywhere and declare priority
+
+Problem: Heavy dependency that’s only needed on server, want to start fetch sooner, want a streamlined syntax for fetching data without having to declare state or useEffect or use a third party lib. Want to handle loading UI via Suspense.
+Solution: RSC
