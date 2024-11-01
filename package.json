@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "concurrently \"next build\" npm:json-server",
     "start": "concurrently npm:dev npm:json-server",
     "lint": "next lint",
     "json-server": "json-server --watch db.json --port 3001 --delay 1000",
@@ -15,8 +15,9 @@
     "@types/uuid": "^10.0.0",
     "clsx": "^2.1.1",
     "concurrently": "^8.2.2",
+    "dayjs": "^1.11.13",
     "json-server": "0.17.4",
-    "next": "15.0.1",
+    "next": "15.0.2",
     "react": "19.0.0-rc-69d4b800-20241021",
     "react-dom": "19.0.0-rc-69d4b800-20241021",
     "sonner": "^1.5.0",
@@ -24,12 +25,12 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@playwright/test": "^1.45.1",
+    "@playwright/test": "^1.48.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "eslint-config-next": "14.2.4",
+    "eslint-config-next": "15.0.2",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
