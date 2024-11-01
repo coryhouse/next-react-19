@@ -8,7 +8,7 @@ const contactSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
-export async function submitContact(formData: FormData) {
+export async function submitContactUsAction(formData: FormData) {
   const validatedContact = contactSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),
@@ -27,7 +27,7 @@ export async function submitContact(formData: FormData) {
   });
 
   if (!response.ok) {
-    throw new Error("Failed to submit contact form");
+    throw new Error("Failed to submit contact us message");
   }
 
   revalidatePath("/contact");
