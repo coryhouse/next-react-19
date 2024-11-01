@@ -16,6 +16,9 @@ export function Nav() {
         <li className="mr-4">
           <Link href="/blog">Blog</Link>
         </li>
+        <li className="mr-4">
+          <Link href="/date">Date</Link>
+        </li>
         <li className="mr-4 flex-row-reverse">
           <Link href="/contact">Contact</Link>
         </li>
