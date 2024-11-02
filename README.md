@@ -41,10 +41,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [x] useFormStatus - Get a form's status.
 - [x] useOptimistic - Show the final state optimistically while an async request is underway.
 
-## Not in 19, but newish
+## Not in React 19, but new
 
 - [x] useTransition / startTransition - Update state without blocking the UI. Only the former provides `isPending`.
 - [ ] React compiler
+- [ ] 'server-only' directive package - Specify that a file can only be run on the server.
 
 ## New features Problem, Solution quiz
 
