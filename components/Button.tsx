@@ -46,8 +46,7 @@ export function Button({
     >
       {isLoading ? (
         <div className="inline-flex gap-1 align-middle flex-nowrap">
-          <Spinner />
-          {loadingLabel}
+          <Spinner /> {loadingLabel}
         </div>
       ) : (
         children
