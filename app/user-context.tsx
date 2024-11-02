@@ -27,7 +27,7 @@ export function UserContextProvider({
       }}
     >
       <Nav />
-      <main className="p-4">{children}</main>
+      <main className="container mx-auto py-8">{children}</main>
     </UserContext.Provider>
   );
 }
