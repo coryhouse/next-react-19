@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import { z } from "zod";
 
 const contactSchema = z.object({
@@ -8,14 +7,33 @@ const contactSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
-export async function postContactUs(formData: FormData) {
+type PostContactUsFormState =
+  | {
+      status: "idle";
+    }
+  | {
+      status: "success";
+      ticketNumber: number;
+    }
+  | {
+      status: "error";
+      errorMessage: string;
+    };
+
+export async function postContactUs(
+  currentState: PostContactUsFormState,
+  formData: FormData
+): Promise<PostContactUsFormState> {
   const validatedContact = contactSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),
   });
 
   if (!validatedContact.success) {
-    throw new Error(validatedContact.error.errors[0].message);
+    return {
+      status: "error",
+      errorMessage: validatedContact.error.errors[0].message,
+    };
   }
 
   const response = await fetch("http://localhost:3001/contacts", {
@@ -26,9 +44,13 @@ export async function postContactUs(formData: FormData) {
     body: JSON.stringify(validatedContact.data),
   });
 
-  if (!response.ok) {
-    throw new Error("Failed to submit contact us message");
-  }
-
-  revalidatePath("/contact");
+  return response.ok
+    ? {
+        status: "success",
+        ticketNumber: 1,
+      }
+    : {
+        status: "error",
+        errorMessage: "Failed to submit contact us message",
+      };
 }
