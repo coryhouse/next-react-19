@@ -8,7 +8,7 @@ const contactSchema = z.object({
   message: z.string().min(1, "Message is required"),
 });
 
-export async function submitContactUsAction(formData: FormData) {
+export async function postContactUs(formData: FormData) {
   const validatedContact = contactSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),

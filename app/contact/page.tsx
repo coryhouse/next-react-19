@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
-import { submitContactUsAction } from "./actions";
+import { postContactUs } from "./actions";
 
 export default function ContactPage() {
   const [error, setError] = useState("");
@@ -11,7 +11,7 @@ export default function ContactPage() {
     setError("");
 
     try {
-      await submitContactUsAction(formData);
+      await postContactUs(formData);
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       setError("Failed to send message. Please try again.");
