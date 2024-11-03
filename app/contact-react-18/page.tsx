@@ -4,25 +4,7 @@ import { Errors } from "@/components/Errors";
 import { useState } from "react";
 import { contactFormSchema } from "../contact/contact-form-schema";
 import { ContactFormFields } from "../contact/contact-form-fields";
-
-type FormState =
-  | {
-      status: "idle";
-      ticketNumber?: never;
-    }
-  | {
-      status: "pending";
-      ticketNumber?: never;
-    }
-  | {
-      status: "success";
-      ticketNumber: number;
-    }
-  | {
-      status: "error";
-      errors: string[];
-      ticketNumber?: never;
-    };
+import { FormState } from "./contact.types";
 
 export default function ContactPage() {
   const [formState, setFormState] = useState<FormState>({

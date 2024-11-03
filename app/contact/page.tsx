@@ -5,21 +5,6 @@ import { Errors } from "@/components/Errors";
 import { ContactFormFields } from "./contact-form-fields";
 import { postContactUs } from "./contact-actions";
 
-export type FormState =
-  | {
-      status: "idle";
-      ticketNumber?: never;
-    }
-  | {
-      status: "success";
-      ticketNumber: number;
-    }
-  | {
-      status: "error";
-      errors: string[];
-      ticketNumber?: never;
-    };
-
 export default function ContactPage() {
   const [formState, postContactUsAction] = useActionState(postContactUs, {
     status: "idle",
