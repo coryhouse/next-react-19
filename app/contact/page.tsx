@@ -1,8 +1,9 @@
 "use client";
-import { postContactUs } from "./contact-actions";
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Errors } from "@/components/Errors";
+import { ContactFormFields } from "./contact-form-fields";
+import { postContactUs } from "./contact-actions";
 
 export type FormState =
   | {
@@ -32,7 +33,7 @@ export default function ContactPage() {
     <form action={postContactUsAction} className="space-y-4">
       {formState.status === "error" && <Errors errors={formState.errors} />}
       <ContactFormFields />
-      <SubmitButton loadingLabel="Submitting...">Submit</SubmitButton>
+      <SubmitButton loadingLabel="Sending...">Send</SubmitButton>
     </form>
   );
 }
