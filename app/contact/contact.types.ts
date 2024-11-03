@@ -1,4 +1,4 @@
-export type FormState =
+export type ContactFormState =
   | {
       status: "idle";
       ticketNumber?: never;

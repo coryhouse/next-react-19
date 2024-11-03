@@ -4,10 +4,10 @@ import { Errors } from "@/components/Errors";
 import { useState } from "react";
 import { contactFormSchema } from "../contact/contact-form-schema";
 import { ContactFormFields } from "../contact/contact-form-fields";
-import { FormState } from "./contact.types";
+import { ContactFormState } from "./contact.types";
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState<FormState>({
+  const [formState, setFormState] = useState<ContactFormState>({
     status: "idle",
   });
 
