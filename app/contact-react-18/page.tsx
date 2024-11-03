@@ -83,10 +83,10 @@ export default function ContactPage() {
       <ContactFormFields />
       <Button
         isLoading={formState.status === "pending"}
-        loadingLabel={"Submitting..."}
+        loadingLabel="Sending..."
         type="submit"
       >
-        Submit
+        Send
       </Button>
     </form>
   );
