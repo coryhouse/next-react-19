@@ -2,77 +2,70 @@
 import { Button } from "@/components/Button";
 import { Errors } from "@/components/Errors";
 import { useState } from "react";
-
-type InputState = {
-  subject: string;
-  message: string;
-};
+import { contactFormSchema } from "../contact/contact-form-schema";
 
 type FormState =
-  | ({
+  | {
       status: "idle";
       ticketNumber?: never;
-    } & InputState)
-  | ({
+    }
+  | {
       status: "pending";
       ticketNumber?: never;
-    } & InputState)
-  | ({
+    }
+  | {
       status: "success";
       ticketNumber: number;
-    } & InputState)
-  | ({
+    }
+  | {
       status: "error";
       errors: string[];
       ticketNumber?: never;
-    } & InputState);
+    };
 
 export default function ContactPage() {
   const [formState, setFormState] = useState<FormState>({
     status: "idle",
-    subject: "",
-    message: "",
   });
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
-    const subject = formData.get("subject") as string;
-    const message = formData.get("message") as string;
-    setFormState({ message, subject, status: "pending" });
 
-    const errors: string[] = [];
-    if (!subject) errors.push("Subject is required");
-    if (!message) errors.push("Message is required");
+    const parsedContact = contactFormSchema.safeParse({
+      subject: formData.get("subject"),
+      message: formData.get("message"),
+    });
 
-    if (errors.length > 0) {
-      return setFormState({
+    if (!parsedContact.success) {
+      return {
         status: "error",
-        subject,
-        message,
-        errors,
-      });
+        errors: parsedContact.error.errors.map((e) => e.message),
+      };
     }
+
+    setFormState({
+      status: "pending",
+    });
 
     const response = await fetch("http://localhost:3001/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ subject, message }),
+      body: JSON.stringify({
+        subject: parsedContact.data.subject,
+        message: parsedContact.data.message,
+      }),
     });
 
     setFormState(
       response.ok
         ? {
-            message,
-            subject,
             status: "success",
             ticketNumber: Math.floor(Math.random() * 100000),
           }
         : {
-            message,
-            subject,
             status: "error",
             errors: ["Failed to submit contact us message"],
           }
