@@ -4,6 +4,21 @@ import { useActionState } from "react";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Errors } from "@/components/Errors";
 
+export type FormState =
+  | {
+      status: "idle";
+      ticketNumber?: never;
+    }
+  | {
+      status: "success";
+      ticketNumber: number;
+    }
+  | {
+      status: "error";
+      errors: string[];
+      ticketNumber?: never;
+    };
+
 export default function ContactPage() {
   const [formState, postContactUsAction] = useActionState(postContactUs, {
     status: "idle",
