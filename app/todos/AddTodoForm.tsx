@@ -20,14 +20,14 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
   return (
     <form
       ref={formRef}
-      action={(payload) => {
-        const title = payload.get("title") as string;
+      action={(formData) => {
+        const title = formData.get("title") as string;
         if (title) {
           // Only add optimistic todo if title is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
           addOptimisticTodo(title);
           formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
         }
-        addTodoAction(payload);
+        addTodoAction(formData);
       }}
       className="mt-4"
     >
