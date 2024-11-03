@@ -6,6 +6,7 @@
 4. Less client-side JS (action is solely on server)
 5. Around 15% less total code.
 6. If page requires a fetch, the fetch starts sooner - as soon as the page is requested.
+7. Can avoid request waterfall by fetching data in parallel on server and streaming HTML to the client.
 
 ## React 18 SPA benefits:
 
