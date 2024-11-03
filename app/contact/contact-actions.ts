@@ -1,24 +1,10 @@
 "use server";
 
 import { contactFormSchema } from "./contact-form-schema";
-
-type FormState =
-  | {
-      status: "idle";
-      ticketNumber?: never;
-    }
-  | {
-      status: "success";
-      ticketNumber: number;
-    }
-  | {
-      status: "error";
-      errors: string[];
-      ticketNumber?: never;
-    };
+import { FormState } from "./page";
 
 export async function postContactUs(
-  currentState: FormState,
+  _currentState: FormState,
   formData: FormData
 ): Promise<FormState> {
   const parsedContact = contactFormSchema.safeParse({
