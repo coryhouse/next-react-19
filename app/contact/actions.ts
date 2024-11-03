@@ -17,7 +17,7 @@ type PostContactUsFormState =
     }
   | {
       status: "error";
-      errorMessage: string;
+      errors: string[];
     };
 
 export async function postContactUs(
@@ -32,7 +32,7 @@ export async function postContactUs(
   if (!validatedContact.success) {
     return {
       status: "error",
-      errorMessage: validatedContact.error.errors[0].message,
+      errors: validatedContact.error.errors.map((e) => e.message),
     };
   }
 
@@ -47,10 +47,10 @@ export async function postContactUs(
   return response.ok
     ? {
         status: "success",
-        ticketNumber: 1,
+        ticketNumber: Math.floor(Math.random() * 100000),
       }
     : {
         status: "error",
-        errorMessage: "Failed to submit contact us message",
+        errors: ["Failed to submit contact us message"],
       };
 }
