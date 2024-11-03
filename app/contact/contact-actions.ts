@@ -2,9 +2,10 @@
 
 import { contactFormSchema } from "./contact-form-schema";
 
-type PostContactUsFormState =
+type FormState =
   | {
       status: "idle";
+      ticketNumber?: never;
     }
   | {
       status: "success";
@@ -13,12 +14,13 @@ type PostContactUsFormState =
   | {
       status: "error";
       errors: string[];
+      ticketNumber?: never;
     };
 
 export async function postContactUs(
-  currentState: PostContactUsFormState,
+  currentState: FormState,
   formData: FormData
-): Promise<PostContactUsFormState> {
+): Promise<FormState> {
   const parsedContact = contactFormSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),
