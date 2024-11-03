@@ -1,5 +1,5 @@
 "use client";
-import { postContactUs } from "./actions";
+import { postContactUs } from "./contact-actions";
 import { useActionState } from "react";
 import { SubmitButton } from "@/components/SubmitButton";
 import { Errors } from "@/components/Errors";
