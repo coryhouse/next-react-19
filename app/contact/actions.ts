@@ -1,11 +1,6 @@
 "use server";
 
-import { z } from "zod";
-
-const contactSchema = z.object({
-  subject: z.string().min(1, "Subject is required"),
-  message: z.string().min(1, "Message is required"),
-});
+import { contactFormSchema } from "./contact-form-schema";
 
 type PostContactUsFormState =
   | {
@@ -24,15 +19,15 @@ export async function postContactUs(
   currentState: PostContactUsFormState,
   formData: FormData
 ): Promise<PostContactUsFormState> {
-  const validatedContact = contactSchema.safeParse({
+  const parsedContact = contactFormSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),
   });
 
-  if (!validatedContact.success) {
+  if (!parsedContact.success) {
     return {
       status: "error",
-      errors: validatedContact.error.errors.map((e) => e.message),
+      errors: parsedContact.error.errors.map((e) => e.message),
     };
   }
 
@@ -41,7 +36,7 @@ export async function postContactUs(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(validatedContact.data),
+    body: JSON.stringify(parsedContact.data),
   });
 
   return response.ok
