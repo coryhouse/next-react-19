@@ -1,12 +1,12 @@
 "use server";
 
 import { contactFormSchema } from "./contact-form-schema";
-import { FormState } from "./page";
+import { ContactFormState } from "./contact.types";
 
 export async function postContactUs(
-  _currentState: FormState,
+  _currentState: ContactFormState,
   formData: FormData
-): Promise<FormState> {
+): Promise<ContactFormState> {
   const parsedContact = contactFormSchema.safeParse({
     subject: formData.get("subject"),
     message: formData.get("message"),
