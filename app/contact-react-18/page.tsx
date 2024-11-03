@@ -54,10 +54,7 @@ export default function ContactPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        subject: parsedContact.data.subject,
-        message: parsedContact.data.message,
-      }),
+      body: JSON.stringify(parsedContact.data),
     });
 
     setFormState(
