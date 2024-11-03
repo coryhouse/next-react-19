@@ -1,9 +1,9 @@
 import DeleteButton from "@/components/DeleteButton";
-import { deleteTodo, toggleComplete } from "./todoActions";
+import { deleteTodo, toggleComplete } from "./todo-actions";
 import { Todo as TodoType } from "@/types/todo";
 import { useState, useTransition } from "react";
 import clsx from "clsx";
-import { EditTodoForm } from "./EditTodoForm";
+import { EditTodoForm } from "./edit-todo-form";
 import { toast } from "sonner";
 import LoadingIndicator from "@/components/LoadingIndicator";
 
