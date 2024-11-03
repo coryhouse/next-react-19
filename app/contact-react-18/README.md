@@ -7,6 +7,10 @@
 5. Around 15% less total code.
 6. If page requires a fetch, the fetch starts sooner - as soon as the page is requested.
 7. Can avoid request waterfall by fetching data in parallel on server and streaming HTML to the client.
+8. Can create reusable SubmitButton that monitors form submission status.
+9. Encourages small, focused files. Requires separating server and client code. Requires separating the server action from the client form.
+10. More opinion should make moving between projects easier. Other people's code will feel more familiar.
+11. Less decision fatigue. Stronger opinions for how to do things. (yes, this seems to contradict point 6 below)
 
 ## React 18 SPA benefits:
 
@@ -14,3 +18,5 @@
 2. Faster page navigation since no server-round trip.
 3. Fewer concepts to learn and master.
 4. Simpler mental model.
+5. More flexible composition. Can do a single file, or many.
+6. Less decision fatigue. Fewer options for how to do things.
