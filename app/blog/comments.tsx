@@ -12,8 +12,8 @@ export function Comments({ commentsPromise }: Readonly<CommentsProps>) {
 
   return (
     <>
-      <h2 className="text-lg">Comments</h2>
-      <section className="border mt-4 p-4">
+      <h2 className="mt-4">Comments</h2>
+      <section className="mt-4">
         <ul>
           {comments.map(({ id, body }) => (
             <li key={id}>{body}</li>
