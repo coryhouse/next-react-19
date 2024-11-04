@@ -29,7 +29,6 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         }
         addTodoAction(formData);
       }}
-      className="mt-4"
     >
       <Input
         id="title"
