@@ -81,8 +81,6 @@ export async function addTodo(
       body: JSON.stringify({ title, completed: false }),
     });
     await resp.json();
-    // Uncomment this to try out the error handling
-    // throw new Error("Failed to add todo");
     revalidateTag("todos");
     return emptyAddToDoFormState;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
