@@ -1,21 +1,20 @@
 "use server";
 
-import { contactFormSchema } from "./contact-form-schema";
+import { contactFormSchema, ContactForm } from "./contact-form-schema";
 import { ContactFormState } from "./contact.types";
 
 export async function postContactUs(
   _currentState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
-  const parsedContact = contactFormSchema.safeParse({
-    subject: formData.get("subject"),
-    message: formData.get("message"),
-  });
+  const contactForm = Object.fromEntries(formData) as ContactForm;
+  const parsedContactForm = contactFormSchema.safeParse(contactForm);
 
-  if (!parsedContact.success) {
+  if (!parsedContactForm.success) {
     return {
       status: "error",
-      errors: parsedContact.error.errors.map((e) => e.message),
+      contactForm,
+      errors: parsedContactForm.error.flatten(),
     };
   }
 
@@ -24,16 +23,21 @@ export async function postContactUs(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(parsedContact.data),
+    body: JSON.stringify(contactForm),
   });
 
   return response.ok
     ? {
         status: "success",
+        contactForm,
         ticketNumber: Math.floor(Math.random() * 100000),
       }
     : {
         status: "error",
-        errors: ["Failed to submit contact us message"],
+        contactForm,
+        errors: {
+          fieldErrors: {},
+          formErrors: ["Failed to submit contact us message"],
+        },
       };
 }

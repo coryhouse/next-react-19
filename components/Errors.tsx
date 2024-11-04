@@ -1,7 +1,7 @@
-import { ContactSchemaErrorType } from "@/app/contact/contact-form-schema";
+import { ContactFormErrors } from "@/app/contact/contact-form-schema";
 
 type ErrorsProps = {
-  errors: ContactSchemaErrorType;
+  errors: ContactFormErrors;
 };
 
 export function Errors({ errors }: ErrorsProps) {

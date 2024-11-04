@@ -1,4 +1,14 @@
-export function ContactFormFields() {
+import { ContactFormErrors } from "./contact-form-schema";
+
+type ContactFormFieldsProps = {
+  defaultValues?: Record<string, string>;
+  errors?: ContactFormErrors;
+};
+
+export function ContactFormFields({
+  defaultValues,
+  errors,
+}: ContactFormFieldsProps) {
   return (
     <>
       <div>
@@ -6,9 +16,13 @@ export function ContactFormFields() {
           Subject
         </label>
         <select
+          {/* Bug: This won't work until this is fixed: https://github.com/facebook/react/issues/30580 */}
+          defaultValue={defaultValues?.subject}
           id="subject"
           name="subject"
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${
+            errors?.fieldErrors.subject ? "border-red-500" : ""
+          }`}
         >
           <option value="">Select a subject</option>
           <option value="support">Support</option>
@@ -20,9 +34,12 @@ export function ContactFormFields() {
           Message
         </label>
         <textarea
+          defaultValue={defaultValues?.message}
           id="message"
           name="message"
-          className="w-full p-2 border rounded"
+          className={`w-full p-2 border rounded ${
+            errors?.fieldErrors.message ? "border-red-500" : ""
+          }`}
           rows={4}
         ></textarea>
       </div>

@@ -6,18 +6,28 @@ import { ContactFormFields } from "./contact-form-fields";
 import { postContactUs } from "./contact-actions";
 
 export default function ContactPage() {
-  const [formState, postContactUsAction] = useActionState(postContactUs, {
+  const [state, postContactUsAction] = useActionState(postContactUs, {
+    contactForm: {
+      subject: "",
+      message: "",
+    },
     status: "idle",
   });
 
-  if (formState.status === "success") {
-    return <p>Message submitted. Ticket #: {formState.ticketNumber}</p>;
+  if (state.status === "success") {
+    return <p>Message submitted. Ticket #: {state.ticketNumber}</p>;
   }
 
   return (
     <form action={postContactUsAction} className="space-y-4">
-      {formState.status === "error" && <Errors errors={formState.errors} />}
-      <ContactFormFields />
+      {state.status === "error" && <Errors errors={state.errors} />}
+      <ContactFormFields
+        defaultValues={{
+          subject: state.contactForm.subject,
+          message: state.contactForm.message,
+        }}
+        errors={state.status === "error" ? state.errors : undefined}
+      />
       <SubmitButton loadingLabel="Sending...">Send</SubmitButton>
     </form>
   );
