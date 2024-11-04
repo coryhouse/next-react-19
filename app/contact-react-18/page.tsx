@@ -15,15 +15,14 @@ export default function ContactPage() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    const parsedContact = contactFormSchema.safeParse({
-      subject: formData.get("subject"),
-      message: formData.get("message"),
-    });
+    const parsedContact = contactFormSchema.safeParse(
+      Object.fromEntries(formData)
+    );
 
     if (!parsedContact.success) {
       return {
         status: "error",
-        errors: parsedContact.error.errors.map((e) => e.message),
+        errors: parsedContact.error.flatten(),
       };
     }
 
@@ -47,7 +46,10 @@ export default function ContactPage() {
           }
         : {
             status: "error",
-            errors: ["Failed to submit contact us message"],
+            errors: {
+              fieldErrors: {},
+              formErrors: ["Failed to submit contact us message"],
+            },
           }
     );
   }
