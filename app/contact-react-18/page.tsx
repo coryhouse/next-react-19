@@ -20,10 +20,10 @@ export default function ContactPage() {
     );
 
     if (!parsedContact.success) {
-      return {
+      return setFormState({
         status: "error",
         errors: parsedContact.error.flatten(),
-      };
+      });
     }
 
     setFormState({
@@ -61,7 +61,9 @@ export default function ContactPage() {
   return (
     <form onSubmit={handleSubmit} className="space-y-4">
       {formState.status === "error" && <Errors errors={formState.errors} />}
-      <ContactFormFields />
+      <ContactFormFields
+        errors={formState.status === "error" ? formState.errors : undefined}
+      />
       <Button
         isLoading={formState.status === "pending"}
         loadingLabel="Sending..."

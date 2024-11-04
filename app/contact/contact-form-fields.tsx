@@ -16,7 +16,7 @@ export function ContactFormFields({
           Subject
         </label>
         <select
-          {/* Bug: This won't work until this is fixed: https://github.com/facebook/react/issues/30580 */}
+          // Bug: defaultValue won't work on select until this is fixed: https://github.com/facebook/react/issues/30580
           defaultValue={defaultValues?.subject}
           id="subject"
           name="subject"
