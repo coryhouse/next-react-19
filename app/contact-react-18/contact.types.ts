@@ -1,3 +1,5 @@
+import { ContactFormErrors } from "../contact/contact-form-schema";
+
 export type ContactFormState =
   | {
       status: "idle";
@@ -13,6 +15,6 @@ export type ContactFormState =
     }
   | {
       status: "error";
-      errors: string[];
       ticketNumber?: never;
+      errors: ContactFormErrors;
     };
