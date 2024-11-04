@@ -14,10 +14,10 @@
 
 ## React 18 SPA benefits:
 
-1. The form doesn't lose submitted data when submitted with a validation error.
-2. Faster page navigation since no server-round trip.
-3. Fewer concepts to learn and master.
-4. Simpler mental model.
-5. More flexible composition. Can do a single file, or many.
-6. Less decision fatigue. Fewer options for how to do things.
-7. React 19 automatically resets forms upon submit, which leads to extra work when doing validation. https://github.com/facebook/react/issues/29034. And any select currently resets even with defaultValue due to this bug: https://github.com/facebook/react/issues/30580
+1. The form doesn't lose submitted data when submitted with a validation error (solvable - must return state from server call, and use defaultValue, but caveat - see next point).
+2. React 19's formAction automatically resets forms upon submit. This leads to extra work when doing validation. https://github.com/facebook/react/issues/29034. And any select currently resets even with defaultValue due to this bug: https://github.com/facebook/react/issues/30580
+3. Faster page navigation since no server-round trip.
+4. Fewer concepts to learn and master.
+5. Simpler mental model.
+6. More flexible composition. Can do a single file, or many.
+7. Less decision fatigue. Fewer options for how to do things.
