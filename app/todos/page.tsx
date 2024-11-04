@@ -5,13 +5,13 @@ import { todoSchema } from "@/types/todo";
 
 export default async function Home() {
   return (
-    <div className="grid">
+    <>
       <title>Todos</title>
       <h1>Todos</h1>
       <Suspense fallback={<Spinner />}>
         <FetchTodos />
       </Suspense>
-    </div>
+    </>
   );
 }
 
