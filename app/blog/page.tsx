@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import { Post } from "../types";
 import { Comments } from "./comments";
+import { Spinner } from "@/components/Spinner";
 
 const postId = 1;
 
@@ -19,7 +20,15 @@ export default async function Home() {
       <h1>{post.title}</h1>
       <title>{post.title}</title>
       <p>{post.body}</p>
-      <Suspense fallback={<div>Loading comments...</div>}>
+      <h2 className="mt-4">Comments</h2>
+      <Suspense
+        fallback={
+          <div className="mt-4">
+            Loading...
+            <Spinner />
+          </div>
+        }
+      >
         <Comments commentsPromise={commentsPromise} />
       </Suspense>
     </>
