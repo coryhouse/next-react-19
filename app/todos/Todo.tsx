@@ -16,7 +16,7 @@ export function Todo({ todo }: TodoProps) {
   const [isTogglePending, startToggleTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
 
-  const isPending = isTogglePending || isDeletePending;
+  const isPending = isTogglePending || isDeletePending || todo.saving;
 
   return (
     <li
