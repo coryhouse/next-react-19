@@ -58,9 +58,6 @@ export function Todo({ todo }: TodoProps) {
       />
 
       {(todo.saving || isPending) && <LoadingIndicator />}
-      {/* <p aria-live="polite" className="sr-only" role="status">
-        {state?.message}
-      </p> */}
     </li>
   );
 }
