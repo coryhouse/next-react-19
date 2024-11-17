@@ -7,6 +7,7 @@ export async function postContactUs(
   _currentState: ContactFormState,
   formData: FormData
 ): Promise<ContactFormState> {
+  // Note: Use zod-form-data if the form contains arrays. More here: https://x.com/rwieruch/status/1857105224806068629
   const contactForm = Object.fromEntries(formData) as ContactForm;
   const parsedContactForm = contactFormSchema.safeParse(contactForm);
 
