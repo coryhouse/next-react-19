@@ -20,7 +20,7 @@ export function UserContextProvider({
   });
 
   return (
-    <UserContext.Provider
+    <UserContext
       value={{
         user,
         setUser,
@@ -28,6 +28,6 @@ export function UserContextProvider({
     >
       <Nav />
       <main className="ml-4 mt-4">{children}</main>
-    </UserContext.Provider>
+    </UserContext>
   );
 }
