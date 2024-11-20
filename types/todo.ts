@@ -1,13 +1,22 @@
 import { z } from "zod";
 
+export const newUnsavedTodoSchema = z.object({
+  status: z.literal("unsaved"),
+  title: z.string(),
+  completed: z.boolean(),
+});
+
 export const todoSchema = z.object({
   id: z.coerce.string(),
   title: z.string(),
   completed: z.boolean(),
-  saving: z.boolean().optional(),
+  // Optional because the db doesn't contain this field.
+  status: z.literal("saved").optional(),
 });
 
-export type Todo = z.infer<typeof todoSchema>;
+export type Todo =
+  | z.infer<typeof todoSchema>
+  | z.infer<typeof newUnsavedTodoSchema>;
 
 export const emptyAddToDoFormState: AddTodoFormState = {
   titleError: "",
