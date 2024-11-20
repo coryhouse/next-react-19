@@ -16,7 +16,8 @@ export function Todo({ todo }: TodoProps) {
   const [isTogglePending, startToggleTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
 
-  const isPending = isTogglePending || isDeletePending || todo.saving;
+  const isPending =
+    isTogglePending || isDeletePending || todo.status === "unsaved";
 
   return (
     <li
@@ -29,6 +30,8 @@ export function Todo({ todo }: TodoProps) {
       <DeleteButton
         aria-label={`Delete ${todo.title}`}
         onClick={() => {
+          // If this is clicked before the optimistic save is completed, ignore the click.
+          if (todo.status === "unsaved") return;
           setIsEditing(false);
           toast.success("Todo deleted");
           startDeleteTransition(async () => {
@@ -36,20 +39,22 @@ export function Todo({ todo }: TodoProps) {
           });
         }}
       />
-      <input
-        className="mr-2"
-        defaultChecked={todo.completed}
-        onChange={() => {
-          toast.success("Todo toggled");
-          startToggleTransition(() => {
-            setIsEditing(false);
-          });
-          toggleComplete(todo.id, !todo.completed);
-        }}
-        type="checkbox"
-        name="id"
-        value={todo.id}
-      />
+      {todo.status === "saved" && (
+        <input
+          className="mr-2"
+          defaultChecked={todo.completed}
+          onChange={() => {
+            toast.success("Todo toggled");
+            startToggleTransition(() => {
+              setIsEditing(false);
+            });
+            toggleComplete(todo.id, !todo.completed);
+          }}
+          type="checkbox"
+          name="id"
+          value={todo.id}
+        />
+      )}
 
       <EditTodoForm
         isEditing={isEditing}
@@ -57,7 +62,7 @@ export function Todo({ todo }: TodoProps) {
         todo={todo}
       />
 
-      {(todo.saving || isPending) && <LoadingIndicator />}
+      {isPending && <LoadingIndicator />}
     </li>
   );
 }
