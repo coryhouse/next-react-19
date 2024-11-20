@@ -69,7 +69,7 @@ export async function toggleComplete(todoId: string, completed: boolean) {
 export async function addTodo(
   currentState: AddTodoFormState,
   formData: FormData
-) {
+): Promise<AddTodoFormState> {
   const title = formData.get("title");
   if (!title) return { titleError: "Title is required" };
   try {
