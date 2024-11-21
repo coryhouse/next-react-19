@@ -11,10 +11,10 @@ type TodosProps = {
 export function Todos({ todos }: TodosProps) {
   const [optimisticTodos, addOptimisticTodo] = useOptimistic(
     todos,
-    (state, newTodo: string) => [
+    (state, task: string) => [
       ...state,
       {
-        title: newTodo,
+        task,
         completed: false,
         status: "unsaved" as const,
       },
@@ -26,7 +26,7 @@ export function Todos({ todos }: TodosProps) {
       <AddTodoForm addOptimisticTodo={addOptimisticTodo} />
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
-          <Todo key={todo.title} todo={todo} />
+          <Todo key={todo.task} todo={todo} />
         ))}
       </ul>
     </>
