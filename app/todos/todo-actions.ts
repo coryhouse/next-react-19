@@ -80,6 +80,10 @@ export async function addTodo(
       },
       body: JSON.stringify({ title, completed: false }),
     });
+  if (!resp.ok) {
+    console.log(JSON.stringify(currentState));
+    return { ...currentState, titleError: "Failed to add todo" };
+  }
     await resp.json();
     revalidateTag("todos");
     return emptyAddToDoFormState;
