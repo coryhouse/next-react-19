@@ -87,10 +87,4 @@ export async function addTodo(
     await resp.json();
     revalidateTag("todos");
     return emptyAddToDoFormState;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (_error) {
-    return {
-      titleError: "Failed to add '" + title + "'.",
-    };
-  }
 }
