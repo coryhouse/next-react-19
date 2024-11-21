@@ -1,4 +1,4 @@
-import { emptyEditTodoFormState, Todo } from "@/types/todo";
+import { emptyEditTodoFormState, SavedTodo } from "@/types/todo";
 import { editTodo } from "./todo-actions";
 import Input from "@/components/Input";
 import clsx from "clsx";
@@ -10,7 +10,7 @@ import { toast } from "sonner";
 type EditTodoFormProps = {
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
-  todo: Todo;
+  todo: SavedTodo;
 };
 
 const readOnlyInputStyles = "border-white bg-transparent";
@@ -53,7 +53,7 @@ export function EditTodoForm({
     return (
       <Input
         disabled
-        defaultValue={todo.title}
+        defaultValue={todo.task}
         className={clsx(readOnlyInputStyles, "line-through")}
       />
     );
@@ -68,11 +68,9 @@ export function EditTodoForm({
       <input type="hidden" name="id" value={todo.id} />
       <Input
         autofocusOnFirstRender
-        name="title"
-        defaultValue={todo.title}
-        error={
-          formState.status === "error" ? formState.errors.title : undefined
-        }
+        name="task"
+        defaultValue={todo.task}
+        error={formState.status === "error" ? formState.errors.task : undefined}
       />
       <div className="ml-2">
         <Button type="submit">{isPending ? "Saving..." : "Save"}</Button>
@@ -84,7 +82,7 @@ export function EditTodoForm({
     </form>
   ) : (
     <Input
-      defaultValue={todo.title}
+      defaultValue={todo.task}
       onFocus={() => setIsEditing(true)}
       className={readOnlyInputStyles}
     />

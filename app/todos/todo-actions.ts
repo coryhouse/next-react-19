@@ -4,6 +4,7 @@ import {
   AddTodoFormState,
   EditTodoFormState,
   emptyAddToDoFormState,
+  taskSchema,
 } from "@/types/todo";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
@@ -16,33 +17,29 @@ export async function editTodo(
   formData: FormData
 ): Promise<EditTodoFormState> {
   const editSchema = z.object({
-    title: z.string(),
+    task: z.string(),
     id: z.coerce.number(),
   });
 
-  const { id, title } = editSchema.parse(Object.fromEntries(formData));
+  const { id, task } = editSchema.parse(Object.fromEntries(formData));
+  if (!task) return { errors: { task: "Task is required" }, status: "error" };
 
-  if (!title)
-    return { errors: { title: "Title is required" }, status: "error" };
-
-  try {
-    const resp = await fetch(baseUrl + id, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title }),
-    });
-    await resp.json();
-    revalidateTag("todos");
-    return { status: "success", resetKey: new Date().toString() };
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  const resp = await fetch(baseUrl + id, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ task }),
+  });
+  if (!resp.ok) {
     return {
-      errors: { title: "Failed to edit '" + title + "'." },
+      errors: { task: "Failed to edit '" + task + "'." },
       status: "error",
     };
   }
+  await resp.json();
+  revalidateTag("todos");
+  return { status: "success", resetKey: new Date().toString() };
 }
 
 export async function deleteTodo(todoId: string) {
@@ -60,6 +57,9 @@ export async function toggleComplete(todoId: string, completed: boolean) {
     },
     body: JSON.stringify({ completed }),
   });
+  if (!resp.ok) {
+    throw new Error("Failed to toggle");
+  }
   await resp.json();
   revalidateTag("todos");
 }
@@ -70,21 +70,19 @@ export async function addTodo(
   currentState: AddTodoFormState,
   formData: FormData
 ): Promise<AddTodoFormState> {
-  const title = formData.get("title");
-  if (!title) return { titleError: "Title is required" };
-  try {
-    const resp = await fetch(baseUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, completed: false }),
-    });
+  const task = taskSchema.parse(formData.get("task"));
+  if (!task) return { task: currentState.task, error: "Task required" };
+  const resp = await fetch("http://localhost:3001/tods/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ task, completed: false }),
+  });
   if (!resp.ok) {
-    console.log(JSON.stringify(currentState));
-    return { ...currentState, titleError: "Failed to add todo" };
+    return { ...currentState, error: "Failed to add todo" };
   }
-    await resp.json();
-    revalidateTag("todos");
-    return emptyAddToDoFormState;
+  await resp.json();
+  revalidateTag("todos");
+  return emptyAddToDoFormState;
 }

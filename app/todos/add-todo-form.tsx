@@ -2,10 +2,10 @@ import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useActionState, useRef } from "react";
 import { addTodo } from "./todo-actions";
-import { emptyAddToDoFormState } from "@/types/todo";
+import { emptyAddToDoFormState, taskSchema } from "@/types/todo";
 
 type AddTodoFormProps = {
-  addOptimisticTodo: (title: string) => void;
+  addOptimisticTodo: (task: string) => void;
 };
 
 export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
@@ -21,21 +21,21 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
     <form
       ref={formRef}
       action={(formData) => {
-        const title = formData.get("title") as string;
-        if (title) {
-          // Only add optimistic todo if title is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
-          addOptimisticTodo(title);
-          formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
+        const task = taskSchema.parse(formData.get("task"));
+        if (task.length > 0) {
+          // Only add optimistic todo if task is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
+          addOptimisticTodo(task);
+          //formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
+          addTodoAction(formData);
         }
-        addTodoAction(formData);
       }}
     >
       <Input
-        id="title"
+        id="task"
         label="Task"
         type="text"
-        name="title"
-        error={isPending ? undefined : formState.titleError}
+        name="task"
+        error={isPending ? undefined : formState.error}
         afterSlot={
           <Button type="submit" className="ml-2">
             Add
@@ -43,7 +43,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         }
       />
       <p role="alert" className="text-red-500 h-4">
-        {!isPending && formState.titleError}
+        {!isPending && formState.error}
       </p>
     </form>
   );

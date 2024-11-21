@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Todos } from "./todos";
 import { Spinner } from "@/components/Spinner";
-import { todoSchema } from "@/types/todo";
+import { savedTodoSchema } from "@/types/todo";
 
 export default async function Home() {
   return (
@@ -18,6 +18,6 @@ export default async function Home() {
 async function FetchTodos() {
   // NOTE: The trailing slash is required for the fetch to work
   const resp = await fetch("http://localhost:3001/todos/");
-  const todos = todoSchema.array().parse(await resp.json());
+  const todos = savedTodoSchema.array().parse(await resp.json());
   return <Todos todos={todos} />;
 }
