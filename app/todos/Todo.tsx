@@ -56,13 +56,11 @@ export function Todo({ todo }: TodoProps) {
         />
       )}
 
-      {todo.status === "saved" && (
-        <EditTodoForm
-          isEditing={isEditing}
-          setIsEditing={setIsEditing}
-          todo={todo}
-        />
-      )}
+      <EditTodoForm
+        isEditing={isEditing}
+        setIsEditing={setIsEditing}
+        todo={todo}
+      />
 
       {isPending && <LoadingIndicator />}
     </li>
