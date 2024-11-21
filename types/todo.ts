@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const newUnsavedTodoSchema = z.object({
+export const unsavedTodoSchema = z.object({
   status: z.literal("unsaved"),
   title: z.string(),
   completed: z.boolean(),
@@ -16,7 +16,7 @@ export const todoSchema = z.object({
 
 export type Todo =
   | z.infer<typeof todoSchema>
-  | z.infer<typeof newUnsavedTodoSchema>;
+  | z.infer<typeof unsavedTodoSchema>;
 
 export const emptyAddToDoFormState: AddTodoFormState = {
   titleError: "",
