@@ -1,4 +1,4 @@
-import { emptyEditTodoFormState, SavedTodo } from "@/types/todo";
+import { emptyEditTodoFormState, Todo } from "@/types/todo";
 import { editTodo } from "./todo-actions";
 import Input from "@/components/Input";
 import clsx from "clsx";
@@ -10,7 +10,7 @@ import { toast } from "sonner";
 type EditTodoFormProps = {
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
-  todo: SavedTodo;
+  todo: Todo;
 };
 
 const readOnlyInputStyles = "border-white bg-transparent";
@@ -65,7 +65,11 @@ export function EditTodoForm({
       action={editTodoAction}
       className="flex flex-row items-center grow-0"
     >
-      <input type="hidden" name="id" value={todo.id} />
+      <input
+        type="hidden"
+        name="id"
+        value={todo.status === "saved" ? todo.id : ""}
+      />
       <Input
         autofocusOnFirstRender
         name="task"
