@@ -72,7 +72,7 @@ export async function addTodo(
 ): Promise<AddTodoFormState> {
   const task = taskSchema.parse(formData.get("task"));
   if (!task) return { task: currentState.task, error: "Task required" };
-  const resp = await fetch("http://localhost:3001/tods/", {
+  const resp = await fetch("http://localhost:3001/todos/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
