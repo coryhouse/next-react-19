@@ -3,17 +3,17 @@
     {
       "id": 1,
       "task": "Learn React",
-      "completed": true
+      "done": true
     },
     {
       "id": 2,
       "task": "Learn Zustand",
-      "completed": true
+      "done": true
     },
     {
       "id": 3,
       "task": "Learn React Router",
-      "completed": false
+      "done": false
     }
   ],
   "posts": [
