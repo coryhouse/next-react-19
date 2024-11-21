@@ -2,17 +2,17 @@
   "todos": [
     {
       "id": 1,
-      "title": "Learn React",
+      "task": "Learn React",
       "completed": true
     },
     {
       "id": 2,
-      "title": "Learn Zustand",
+      "task": "Learn Zustand",
       "completed": true
     },
     {
       "id": 3,
-      "title": "Learn React Router",
+      "task": "Learn React Router",
       "completed": false
     }
   ],
