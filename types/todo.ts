@@ -1,29 +1,34 @@
 import { z } from "zod";
 
+export const taskSchema = z.string();
+
 export const unsavedTodoSchema = z.object({
   status: z.literal("unsaved"),
-  title: z.string(),
+  task: taskSchema,
   completed: z.boolean(),
 });
 
-export const todoSchema = z.object({
+export const savedTodoSchema = z.object({
   id: z.coerce.string(),
-  title: z.string(),
+  task: taskSchema,
   completed: z.boolean(),
   // Optional because the db doesn't contain this field.
   status: z.literal("saved").optional(),
 });
 
-export type Todo =
-  | z.infer<typeof todoSchema>
-  | z.infer<typeof unsavedTodoSchema>;
+export type SavedTodo = z.infer<typeof savedTodoSchema>;
+export type UnsavedTodo = z.infer<typeof unsavedTodoSchema>;
+
+export type Todo = SavedTodo | UnsavedTodo;
 
 export const emptyAddToDoFormState: AddTodoFormState = {
-  titleError: "",
+  task: "",
+  error: "",
 };
 
 export type AddTodoFormState = {
-  titleError: string;
+  task: string;
+  error: string;
 };
 
 export type EditTodoFormState =
@@ -37,7 +42,7 @@ export type EditTodoFormState =
   | {
       status: "error";
       errors: {
-        title: string;
+        task: string;
       };
     };
 
