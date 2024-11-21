@@ -15,7 +15,7 @@ export function Todos({ todos }: TodosProps) {
       ...state,
       {
         completed: false,
-        title: newTodo,
+        task: newTodo,
         status: "unsaved",
       },
     ]);
@@ -26,7 +26,7 @@ export function Todos({ todos }: TodosProps) {
       <AddTodoForm addOptimisticTodo={addOptimisticTodo} />
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
-          <Todo key={todo.title} todo={todo} />
+          <Todo key={todo.task} todo={todo} />
         ))}
       </ul>
     </>

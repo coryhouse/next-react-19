@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Todos } from "./todos";
 import { Spinner } from "@/components/Spinner";
-import { todoSchema } from "@/types/todo";
+import { savedTodoSchema } from "@/types/todo";
 import { Todo as TodoType } from "@/types/todo";
 
 export default function Home() {
@@ -12,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchTodos() {
       const resp = await fetch("http://localhost:3001/todos/");
-      const parsedResp = todoSchema.array().parse(await resp.json());
+      const parsedResp = savedTodoSchema.array().parse(await resp.json());
       setTodos(parsedResp);
       setIsLoading(false);
     }

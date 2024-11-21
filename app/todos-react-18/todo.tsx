@@ -1,5 +1,5 @@
 import DeleteButton from "@/components/DeleteButton";
-import { deleteTodo, toggleComplete } from "./todo-actions";
+import { deleteTodo, toggleComplete } from "../todos/todo-actions";
 import { Todo as TodoType } from "@/types/todo";
 import { useState, useTransition } from "react";
 import clsx from "clsx";
@@ -28,7 +28,7 @@ export function Todo({ todo }: TodoProps) {
     >
       {/* Must useTransition instead of a form here so we can "see" the delete is in progress above. We would need a form tag for each todo, but the form would have to be above the ul for us to read the form's status via useFormStatus. And the <form> can't be a child of <ul>, because that's invalid HTML. Thus, useTransition is our only option here. */}
       <DeleteButton
-        aria-label={`Delete ${todo.title}`}
+        aria-label={`Delete ${todo.task}`}
         onClick={() => {
           setIsEditing(false);
           toast.success("Todo deleted");
