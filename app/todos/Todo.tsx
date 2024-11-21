@@ -30,7 +30,7 @@ export function Todo({ todo }: TodoProps) {
       <DeleteButton
         aria-label={`Delete ${todo.task}`}
         onClick={() => {
-          // If this is clicked before the optimistic save is completed, ignore the click.
+          // If this is clicked before the optimistic save is complete, ignore the click.
           if (todo.status === "unsaved") return;
           setIsEditing(false);
           toast.success("Todo deleted");
@@ -42,13 +42,13 @@ export function Todo({ todo }: TodoProps) {
       {todo.status === "saved" && (
         <input
           className="mr-2"
-          defaultChecked={todo.completed}
+          defaultChecked={todo.done}
           onChange={() => {
             toast.success("Todo toggled");
             startToggleTransition(() => {
               setIsEditing(false);
             });
-            toggleComplete(todo.id, !todo.completed);
+            toggleComplete(todo.id, !todo.done);
           }}
           type="checkbox"
           name="id"

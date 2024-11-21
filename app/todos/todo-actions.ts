@@ -49,13 +49,13 @@ export async function deleteTodo(todoId: string) {
   revalidateTag("todos");
 }
 
-export async function toggleComplete(todoId: string, completed: boolean) {
+export async function toggleComplete(todoId: string, done: boolean) {
   const resp = await fetch(baseUrl + todoId, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ completed }),
+    body: JSON.stringify({ done }),
   });
   if (!resp.ok) {
     throw new Error("Failed to toggle");
@@ -77,7 +77,7 @@ export async function addTodo(
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ task, completed: false }),
+    body: JSON.stringify({ task, done: false }),
   });
   if (!resp.ok) {
     return { ...currentState, error: "Failed to add todo" };

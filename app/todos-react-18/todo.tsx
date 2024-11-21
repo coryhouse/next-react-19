@@ -40,13 +40,13 @@ export function Todo({ todo }: TodoProps) {
       {todo.status === "saved" && (
         <input
           className="mr-2"
-          defaultChecked={todo.completed}
+          defaultChecked={todo.done}
           onChange={() => {
             toast.success("Todo toggled");
             startToggleTransition(() => {
               setIsEditing(false);
             });
-            toggleComplete(todo.id, !todo.completed);
+            toggleComplete(todo.id, !todo.done);
           }}
           type="checkbox"
           name="id"

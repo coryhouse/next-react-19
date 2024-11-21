@@ -15,7 +15,7 @@ export function Todos({ todos }: TodosProps) {
       ...state,
       {
         task,
-        completed: false,
+        done: false,
         status: "unsaved" as const,
       },
     ]

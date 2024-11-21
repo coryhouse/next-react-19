@@ -14,7 +14,7 @@ export function Todos({ todos }: TodosProps) {
     setOptimisticTodos((state) => [
       ...state,
       {
-        completed: false,
+        done: false,
         task: newTodo,
         status: "unsaved",
       },

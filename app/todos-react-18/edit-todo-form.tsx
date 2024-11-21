@@ -35,7 +35,7 @@ export function EditTodoForm({
     }
   }, [formState.status, formResetKey, setIsEditing]);
 
-  if (todo.completed) {
+  if (todo.done) {
     return (
       <Input
         disabled

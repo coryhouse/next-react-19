@@ -5,13 +5,13 @@ export const taskSchema = z.string();
 export const unsavedTodoSchema = z.object({
   status: z.literal("unsaved"),
   task: taskSchema,
-  completed: z.boolean(),
+  done: z.boolean(),
 });
 
 export const savedTodoSchema = z.object({
   id: z.coerce.string(),
   task: taskSchema,
-  completed: z.boolean(),
+  done: z.boolean(),
   // Optional because the db doesn't contain this field.
   status: z.literal("saved").optional(),
 });

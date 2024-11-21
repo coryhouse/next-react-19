@@ -49,7 +49,7 @@ export function EditTodoForm({
 
   // 4. Don't useActionState. Just useTransition instead of useActionState since the form requires JS to function anyway. https://stackoverflow.com/a/78249448/26180
 
-  if (todo.completed) {
+  if (todo.done) {
     return (
       <Input
         disabled

@@ -21,7 +21,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ task, completed: false }),
+        body: JSON.stringify({ task, done: false }),
       });
       await resp.json();
       setFormState(emptyAddToDoFormState);
