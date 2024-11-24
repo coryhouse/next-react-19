@@ -6,12 +6,14 @@ import clsx from "clsx";
 import { EditTodoForm } from "./edit-todo-form";
 import { toast } from "sonner";
 import LoadingIndicator from "@/components/LoadingIndicator";
+import { TodoAction } from "./todosReducer";
 
 type TodoProps = {
   todo: TodoType;
+  dispatch: (action: TodoAction) => void;
 };
 
-export function Todo({ todo }: TodoProps) {
+export function Todo({ todo, dispatch }: TodoProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [isTogglePending, startToggleTransition] = useTransition();
   const [isDeletePending, startDeleteTransition] = useTransition();
@@ -35,6 +37,7 @@ export function Todo({ todo }: TodoProps) {
           setIsEditing(false);
           toast.success("Todo deleted");
           startDeleteTransition(async () => {
+            dispatch({ type: "DELETE_TODO", id: todo.id });
             await deleteTodo(todo.id);
           });
         }}
@@ -49,6 +52,7 @@ export function Todo({ todo }: TodoProps) {
               setIsEditing(false);
             });
             toggleComplete(todo.id, !todo.done);
+            dispatch({ type: "TOGGLE_TODO", id: todo.id });
           }}
           type="checkbox"
           name="id"

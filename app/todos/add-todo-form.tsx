@@ -3,12 +3,13 @@ import Input from "@/components/Input";
 import { useActionState, useRef } from "react";
 import { addTodo } from "./todo-actions";
 import { emptyAddToDoFormState, taskSchema } from "@/types/todo";
+import { TodoAction } from "./todosReducer";
 
 type AddTodoFormProps = {
-  addOptimisticTodo: (task: string) => void;
+  dispatch: (action: TodoAction) => void;
 };
 
-export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
+export function AddTodoForm({ dispatch }: AddTodoFormProps) {
   // On RSC apps, useActionState makes forms interactive before JavaScript has executed on the client. When used without Server Components, is equivalent to component local state.
   const [formState, addTodoAction, isPending] = useActionState(
     addTodo,
@@ -24,7 +25,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
         const task = taskSchema.parse(formData.get("task"));
         if (task.length > 0) {
           // Only add optimistic todo if task is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
-          addOptimisticTodo(task);
+          dispatch({ type: "ADD_TODO", task });
           //formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
           addTodoAction(formData);
         }
