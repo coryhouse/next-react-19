@@ -1,3 +1,4 @@
+"use client";
 import { Todo as TodoType } from "@/types/todo";
 import { AddTodoForm } from "./add-todo-form";
 import { Todo } from "./todo";
