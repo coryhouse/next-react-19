@@ -67,11 +67,7 @@ export function EditTodoForm({
       action={editTodoAction}
       className="flex flex-row items-center grow-0"
     >
-      <input
-        type="hidden"
-        name="id"
-        value={todo.status === "saved" ? todo.id : ""}
-      />
+      <input type="hidden" name="id" value={todo.id} />
       <Input
         autofocusOnFirstRender
         name="task"
