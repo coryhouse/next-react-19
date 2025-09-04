@@ -17,8 +17,8 @@ export default function RootLayout({
       <head>
         <title>React 19 Demo</title>
       </head>
-      <Toaster position="top-right" richColors />
       <body className="antialiased">
+        <Toaster position="top-right" richColors />
         <UserContextProvider>{children}</UserContextProvider>
       </body>
     </html>
