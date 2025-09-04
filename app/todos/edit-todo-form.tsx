@@ -43,6 +43,8 @@ export function EditTodoForm({
   // Could just handle via JS instead of useActionState since our fancy form requires JS to function anyway
   // if (formRef.current && formState.status === "success") {
   //   setIsEditing(false);
+  //   toast.success("Todo saved.");
+  //   formRef.current.reset();
   // }
 
   // 3. Handle async logic in the form action. (See AddToDoForm)
