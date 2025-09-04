@@ -10,7 +10,7 @@ type AddTodoFormProps = {
 };
 
 export function AddTodoForm({ dispatch }: AddTodoFormProps) {
-  // On RSC apps, useActionState makes forms interactive before JavaScript has executed on the client. When used without Server Components, is equivalent to component local state.
+  // On RSC apps, useActionState makes forms interactive before JavaScript has executed on the client. When used without Server Components, it's equivalent to component local state.
   const [formState, addTodoAction, isPending] = useActionState(
     addTodo,
     emptyAddToDoFormState
