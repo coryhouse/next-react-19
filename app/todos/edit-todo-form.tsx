@@ -10,7 +10,7 @@ import { toast } from "sonner";
 type EditTodoFormProps = {
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
-  todo: Todo;
+  todo: SavedTodo;
 };
 
 const readOnlyInputStyles = "border-white bg-transparent";
