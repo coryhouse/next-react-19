@@ -2,7 +2,7 @@
 import { Todo as TodoType } from "@/types/todo";
 import { useOptimistic } from "react";
 import { AddTodoForm } from "./add-todo-form";
-import { Todo } from "./todo";
+import { Todo } from "./Todo";
 import { todosReducer } from "./todosReducer";
 
 type TodosProps = {
