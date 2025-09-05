@@ -12,6 +12,7 @@ export default async function Home() {
   // ✅ faster time-to-interactive
   const postResponse = await fetch("http://localhost:3001/posts/" + postId);
   const post = postSchema.parse(await postResponse.json());
+
   // Not awaited, so won't wait for the promise to resolve
   const commentsPromise = fetch(
     "http://localhost:3001/comments?postId=" + postId
