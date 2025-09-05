@@ -23,8 +23,8 @@ export function AddTodoForm({ dispatch }: AddTodoFormProps) {
       ref={formRef}
       action={(formData) => {
         const task = taskSchema.parse(formData.get("task"));
+        // Only add optimistic todo if task is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
         if (task.length > 0) {
-          // Only add optimistic todo if task is not empty. This avoids a flash of the optimistic todo when the user clicks "add" with an empty todo is added.
           dispatch({ type: "ADD_TODO", task });
           //formRef.current?.reset(); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
           addTodoAction(formData);
