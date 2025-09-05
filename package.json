@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start": "concurrently npm:dev npm:json-server",
-    "build": "concurrently \"next build\" npm:json-server",
-    "dev": "next dev",
+    "dev": "concurrently \"next dev\" npm:api",
+    "start": "concurrently \"next start\" npm:api",
+    "build": "concurrently \"next build\" npm:api",
     "lint": "next lint",
-    "json-server": "json-server --watch db.json --port 3001 --delay 1000",
+    "api": "json-server --watch db.json --port 3001 --delay 1000",
     "pw": "npx playwright test --ui"
   },
   "dependencies": {
