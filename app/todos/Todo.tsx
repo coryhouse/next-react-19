@@ -42,29 +42,31 @@ export function Todo({ todo, dispatch }: TodoProps) {
           });
         }}
       />
-      {todo.status === "saved" && (
-        <>
-          <input
-            className="mr-2"
-            defaultChecked={todo.done}
-            onChange={() => {
-              toast.success("Todo toggled");
-              startToggleTransition(() => {
-                setIsEditing(false);
-                toggleComplete(todo.id, !todo.done);
-                dispatch({ type: "TOGGLE_TODO", id: todo.id });
-              });
-            }}
-            type="checkbox"
-            name="id"
-            value={todo.id}
-          />
-          <EditTodoForm
-            isEditing={isEditing}
-            setIsEditing={setIsEditing}
-            todo={todo}
-          />
-        </>
+      <input
+        className="mr-2"
+        defaultChecked={todo.done}
+        onChange={() => {
+          toast.success("Todo toggled");
+          startToggleTransition(() => {
+            if (todo.status === "unsaved") return; // just here to narrow type. Shouldn't be possible to toggle an unsaved todo anyway.
+            setIsEditing(false);
+            toggleComplete(todo.id, !todo.done);
+            dispatch({ type: "TOGGLE_TODO", id: todo.id });
+          });
+        }}
+        type="checkbox"
+        name="id"
+        value={todo.status === "saved" ? todo.id : ""}
+      />
+
+      {todo.status === "saved" ? (
+        <EditTodoForm
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          todo={todo}
+        />
+      ) : (
+        <span>{todo.task}</span>
       )}
 
       {isPending && <LoadingIndicator />}
