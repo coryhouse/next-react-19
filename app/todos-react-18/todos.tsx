@@ -11,12 +11,12 @@ type TodosProps = {
 export function Todos({ todos }: TodosProps) {
   const [optimisticTodos, setOptimisticTodos] = useState([...todos]);
 
-  const addOptimisticTodo = (newTodo: string) => {
+  const addOptimisticTodo = (task: string) => {
     setOptimisticTodos((state) => [
       ...state,
       {
         done: false,
-        task: newTodo,
+        task,
         status: "unsaved",
       },
     ]);
@@ -24,7 +24,16 @@ export function Todos({ todos }: TodosProps) {
 
   return (
     <>
-      <AddTodoForm addOptimisticTodo={addOptimisticTodo} />
+      <AddTodoForm
+        addOptimisticTodo={addOptimisticTodo}
+        markOptimisticTodoComplete={(id: string, task: string) => {
+          setOptimisticTodos((state) =>
+            state.map((i) =>
+              i.task === task ? { ...i, id, status: "saved" } : i
+            )
+          );
+        }}
+      />
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
           <Todo key={todo.task} todo={todo} />
