@@ -6,12 +6,10 @@ import { postSchema } from "./postSchema";
 const postId = 1;
 
 export default async function Home() {
-  // NOT awaited, so shows loading spinner until promises resolve
+  // All calls are NOT awaited, so shows loading spinner until promises resolve
   // Tradeoff:
-  // 🚩 faster time-to-first-byte, and fast response when the Blog link is clicked
-  // ✅ slower time-to-interactive
-
-  // Not awaited, so won't wait for the promise to resolve
+  // 🚩 slower time-to-interactive, more code, need separate component
+  // ✅ faster time-to-first-byte, and fast response when the Blog link is clicked
   const postPromise = fetch("http://localhost:3001/posts/" + postId);
   const commentsPromise = fetch(
     "http://localhost:3001/comments?postId=" + postId
