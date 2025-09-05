@@ -30,6 +30,7 @@ export function Todo({ todo }: TodoProps) {
       <DeleteButton
         aria-label={`Delete ${todo.task}`}
         onClick={() => {
+          if (todo.status !== "saved") return; // just here to narrow type. Shouldn't be possible to click delete on an unsaved todo anyway.
           setIsEditing(false);
           toast.success("Todo deleted");
           startDeleteTransition(async () => {
