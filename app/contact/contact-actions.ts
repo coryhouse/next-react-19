@@ -1,5 +1,6 @@
 "use server";
 
+import z from "zod";
 import { contactFormSchema, ContactForm } from "./contact-form-schema";
 import { ContactFormState } from "./contact.types";
 
@@ -15,7 +16,7 @@ export async function postContactUs(
     return {
       status: "error",
       contactForm,
-      errors: parsedContactForm.error.flatten(),
+      errors: z.flattenError(parsedContactForm.error),
     };
   }
 
