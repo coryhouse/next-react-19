@@ -21,6 +21,10 @@ export default function ContactPage() {
   return (
     <form action={postContactUsAction} className="space-y-4">
       {state.status === "error" && <Errors errors={state.errors} />}
+      <p>
+        This page works without JS because it uses useActionState and isn't
+        reliant on JS for any client-side interactivity.
+      </p>
       <ContactFormFields
         defaultValues={{
           subject: state.contactForm.subject,
