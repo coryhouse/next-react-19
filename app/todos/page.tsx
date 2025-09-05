@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { Todos } from "./todos";
+import { Todos } from "./Todos";
 import { Spinner } from "@/components/Spinner";
 import { savedTodoSchema } from "@/types/todo";
 
