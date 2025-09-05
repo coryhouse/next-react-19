@@ -60,7 +60,7 @@ export function AddTodoForm({ addOptimisticTodo }: AddTodoFormProps) {
           </Button>
         }
       />
-      <p role="alert" className="text-red-500 h-4">
+      <p role="alert" className="h-4 text-red-500">
         {!isPending && formState.error}
       </p>
     </form>
