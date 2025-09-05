@@ -30,8 +30,6 @@ export function EditTodoForm({
   useEffect(() => {
     if (formState.status === "success") {
       formRef.current?.reset();
-      setIsEditing(false);
-      toast.success("Todo saved.");
     }
   }, [formState.status, formResetKey, setIsEditing]);
 
@@ -47,11 +45,17 @@ export function EditTodoForm({
 
   return isEditing ? (
     <form
-      ref={formRef}
-      action={editTodoAction}
+      onSubmit={async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.currentTarget);
+        setIsPending(true);
+        const result = await editTodo(formState, formData);
+        setFormState(result);
+        setIsEditing(false);
+        toast.success("Todo saved.");
+      }}
       className="flex flex-row items-center grow-0"
     >
-      <input type="hidden" name="id" value={todo.id} />
       <Input
         autofocusOnFirstRender
         name="task"
