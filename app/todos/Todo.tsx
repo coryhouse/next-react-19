@@ -43,28 +43,29 @@ export function Todo({ todo, dispatch }: TodoProps) {
         }}
       />
       {todo.status === "saved" && (
-        <input
-          className="mr-2"
-          defaultChecked={todo.done}
-          onChange={() => {
-            toast.success("Todo toggled");
-            startToggleTransition(() => {
-              setIsEditing(false);
-            });
-            toggleComplete(todo.id, !todo.done);
-            dispatch({ type: "TOGGLE_TODO", id: todo.id });
-          }}
-          type="checkbox"
-          name="id"
-          value={todo.id}
-        />
+        <>
+          <input
+            className="mr-2"
+            defaultChecked={todo.done}
+            onChange={() => {
+              toast.success("Todo toggled");
+              startToggleTransition(() => {
+                setIsEditing(false);
+                toggleComplete(todo.id, !todo.done);
+                dispatch({ type: "TOGGLE_TODO", id: todo.id });
+              });
+            }}
+            type="checkbox"
+            name="id"
+            value={todo.id}
+          />
+          <EditTodoForm
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+            todo={todo}
+          />
+        </>
       )}
-
-      <EditTodoForm
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-        todo={todo}
-      />
 
       {isPending && <LoadingIndicator />}
     </li>
