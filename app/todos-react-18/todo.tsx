@@ -1,5 +1,5 @@
 import DeleteButton from "@/components/DeleteButton";
-import { deleteTodo, toggleComplete } from "../todos/todo-actions";
+import { deleteTodo, toggleComplete } from "./todo-actions";
 import { Todo as TodoType } from "@/types/todo";
 import { useState, useTransition } from "react";
 import clsx from "clsx";
@@ -13,8 +13,8 @@ type TodoProps = {
 
 export function Todo({ todo }: TodoProps) {
   const [isEditing, setIsEditing] = useState(false);
-  const [isTogglePending, startToggleTransition] = useTransition();
-  const [isDeletePending, startDeleteTransition] = useTransition();
+  const [isTogglePending, setIsTogglePending] = useState(false);
+  const [isDeletePending, setIsDeletePending] = useState(false);
 
   const isPending =
     isTogglePending || isDeletePending || todo.status === "unsaved";
@@ -29,25 +29,25 @@ export function Todo({ todo }: TodoProps) {
       {/* Must useTransition instead of a form here so we can "see" the delete is in progress above. We would need a form tag for each todo, but the form would have to be above the ul for us to read the form's status via useFormStatus. And the <form> can't be a child of <ul>, because that's invalid HTML. Thus, useTransition is our only option here. */}
       <DeleteButton
         aria-label={`Delete ${todo.task}`}
-        onClick={() => {
+        onClick={async () => {
           if (todo.status !== "saved") return; // just here to narrow type. Shouldn't be possible to click delete on an unsaved todo anyway.
           setIsEditing(false);
           toast.success("Todo deleted");
-          startDeleteTransition(async () => {
-            await deleteTodo(todo.id);
-          });
+          setIsDeletePending(true);
+          await deleteTodo(todo.id);
+          setIsDeletePending(false);
         }}
       />
       {todo.status === "saved" && (
         <input
           className="mr-2"
           defaultChecked={todo.done}
-          onChange={() => {
+          onChange={async () => {
             toast.success("Todo toggled");
-            startToggleTransition(() => {
-              setIsEditing(false);
-            });
-            toggleComplete(todo.id, !todo.done);
+            setIsTogglePending(true);
+            setIsEditing(false);
+            await toggleComplete(todo.id, !todo.done);
+            setIsTogglePending(false);
           }}
           type="checkbox"
           name="id"
