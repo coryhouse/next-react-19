@@ -47,7 +47,7 @@ export function EditTodoForm({
   //   formRef.current.reset();
   // }
 
-  // 3. Handle async logic in the form action. (See AddToDoForm)
+  // 3. Handle async logic in the form action. (See add-todo-form)
 
   // 4. Don't useActionState. Just useTransition instead of useActionState since the form requires JS to function anyway. https://stackoverflow.com/a/78249448/26180
 
