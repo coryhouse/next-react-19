@@ -36,18 +36,6 @@ if (!customElements.get("custom-button")) {
   customElements.define("custom-button", CustomButton);
 }
 
-declare global {
-  // eslint-disable-next-line @typescript-eslint/no-namespace
-  namespace JSX {
-    interface IntrinsicElements {
-      "custom-button": React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement>,
-        HTMLElement
-      >;
-    }
-  }
-}
-
 export function CustomButtonWrapper({
   children,
 }: {
@@ -61,5 +49,5 @@ export function CustomButtonWrapper({
     }
   }, []);
 
-  return <custom-button ref={ref}>{children}</custom-button>;
+  return React.createElement('custom-button', { ref }, children);
 }
