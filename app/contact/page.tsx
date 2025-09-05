@@ -22,7 +22,7 @@ export default function ContactPage() {
     <form action={postContactUsAction} className="space-y-4">
       {state.status === "error" && <Errors errors={state.errors} />}
       <p>
-        This page works without JS because it uses useActionState and isn't
+        This page works without JS because it uses useActionState and isn&apos;t
         reliant on JS for any client-side interactivity.
       </p>
       <ContactFormFields
