@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { Todos } from "./todos";
 import { Spinner } from "@/components/Spinner";
-import { savedTodoSchema } from "@/types/todo";
-import { Todo as TodoType } from "@/types/todo";
+import { savedTodoSchema } from "./todo.types";
+import { Todo as TodoType } from "./todo.types";
 
 export default function Home() {
   const [todos, setTodos] = useState<TodoType[]>([]);
