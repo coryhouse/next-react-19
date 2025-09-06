@@ -21,31 +21,3 @@ export type SavedTodo = z.infer<typeof savedTodoSchema>;
 export type UnsavedTodo = z.infer<typeof unsavedTodoSchema>;
 
 export type Todo = SavedTodo | UnsavedTodo;
-
-export const emptyAddToDoFormState: AddTodoFormState = {
-  task: "",
-  error: "",
-};
-
-export type AddTodoFormState = {
-  task: string;
-  error: string;
-};
-
-export type EditTodoFormState =
-  | {
-      status: "idle";
-    }
-  | {
-      status: "success";
-    }
-  | {
-      status: "error";
-      errors: {
-        task: string;
-      };
-    };
-
-export const emptyEditTodoFormState: EditTodoFormState = {
-  status: "idle",
-};
