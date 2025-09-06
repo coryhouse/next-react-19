@@ -1,16 +1,18 @@
 import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useState } from "react";
-import { emptyAddToDoFormState, taskSchema } from "@/types/todo";
+import { emptyAddToDoFormState, taskSchema } from "./todo.types";
 
 type AddTodoFormProps = {
   addOptimisticTodo: (task: string) => void;
   markOptimisticTodoComplete: (id: string, task: string) => void;
+  removeOptimisticTodo: (task: string) => void;
 };
 
 export function AddTodoForm({
   addOptimisticTodo,
   markOptimisticTodoComplete,
+  removeOptimisticTodo,
 }: AddTodoFormProps) {
   const [formState, setFormState] = useState(emptyAddToDoFormState);
   const [isPending, setIsPending] = useState(false);
@@ -38,6 +40,7 @@ export function AddTodoForm({
           ...formState,
           error: "Failed to add '" + task + "'.",
         });
+        removeOptimisticTodo(task);
       } finally {
         setIsPending(false);
       }
