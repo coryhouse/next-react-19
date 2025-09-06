@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Todos } from "./Todos";
 import { Spinner } from "@/components/Spinner";
-import { savedTodoSchema } from "@/types/todo";
+import { savedTodoSchema } from "./todo.types";
 
 export default async function Home() {
   return (

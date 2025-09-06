@@ -2,7 +2,7 @@ import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useActionState, useRef } from "react";
 import { addTodo } from "./todo-actions";
-import { emptyAddToDoFormState, taskSchema } from "@/types/todo";
+import { emptyAddToDoFormState, taskSchema } from "./todo.types";
 import { TodoAction } from "./todosReducer";
 import { toast } from "sonner";
 

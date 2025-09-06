@@ -1,5 +1,5 @@
 "use client";
-import { Todo as TodoType } from "@/types/todo";
+import { Todo as TodoType } from "./todo.types";
 import { useOptimistic } from "react";
 import { AddTodoForm } from "./add-todo-form";
 import { Todo } from "./Todo";

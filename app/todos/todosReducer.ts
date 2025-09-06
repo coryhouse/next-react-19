@@ -1,4 +1,4 @@
-import { Todo } from "@/types/todo";
+import { Todo } from "./todo.types";
 
 export type TodoAction =
   | {

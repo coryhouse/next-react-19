@@ -1,6 +1,7 @@
+"use client";
 import DeleteButton from "@/components/DeleteButton";
 import { deleteTodo, toggleComplete } from "./todo-actions";
-import { Todo as TodoType } from "@/types/todo";
+import { Todo as TodoType } from "./todo.types";
 import { useState, useTransition } from "react";
 import clsx from "clsx";
 import { EditTodoForm } from "./edit-todo-form";

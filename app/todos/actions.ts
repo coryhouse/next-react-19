@@ -5,7 +5,7 @@ import {
   EditTodoFormState,
   emptyAddToDoFormState,
   taskSchema,
-} from "@/types/todo";
+} from "./todo.types";
 import { revalidateTag } from "next/cache";
 import { z } from "zod";
 
