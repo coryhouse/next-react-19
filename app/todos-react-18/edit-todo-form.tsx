@@ -1,17 +1,38 @@
-import { emptyEditTodoFormState, Todo } from "@/types/todo";
-import { editTodo } from "./todo-actions";
+"use client";
 import Input from "@/components/Input";
 import clsx from "clsx";
-import { useEffect, useRef, useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Button } from "@/components/Button";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { toast } from "sonner";
+import { type SavedTodo } from "./todo.types";
+
+export type EditTodoFormState =
+  | {
+      status: "idle";
+    }
+  | {
+      status: "success";
+    }
+  | {
+      status: "error";
+      errors: {
+        task: string;
+      };
+    };
+
+export const emptyEditTodoFormState: EditTodoFormState = {
+  status: "idle",
+};
 
 type EditTodoFormProps = {
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
-  todo: Todo;
+  todo: SavedTodo;
+  setOptimistic: (todo: SavedTodo) => void;
 };
+
+const baseUrl = "http://localhost:3001/todos/";
 
 const readOnlyInputStyles = "border-white bg-transparent";
 
@@ -19,19 +40,58 @@ export function EditTodoForm({
   isEditing,
   setIsEditing,
   todo,
+  setOptimistic,
 }: EditTodoFormProps) {
   const [formState, setFormState] = useState(emptyEditTodoFormState);
   const [isPending, setIsPending] = useState(false);
-  const formRef = useRef<HTMLFormElement>(null);
 
-  const formResetKey =
-    formState.status === "success" ? formState.resetKey : undefined;
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const task = formData.get("task")?.valueOf();
+    setIsPending(true);
+    if (!task || typeof task !== "string")
+      return { errors: { task: "Task is required" }, status: "error" };
 
-  useEffect(() => {
-    if (formState.status === "success") {
-      formRef.current?.reset();
+    setOptimistic({
+      ...todo,
+      task,
+    });
+    toast.success("Todo saved.");
+
+    try {
+      const resp = await fetch(baseUrl + todo.id, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ task }),
+      });
+      if (!resp.ok) {
+        return {
+          errors: { task: "Failed to edit '" + task + "'." },
+          status: "error",
+        };
+      }
+      setFormState({
+        status: "success",
+      });
+      setIsEditing(false);
+    } catch (error) {
+      setFormState({
+        ...formState,
+        status: "error",
+        errors: {
+          task: "An error occurred. Please try again.",
+        },
+      });
+      // Rollback optimistic set above since an error occurred
+      setOptimistic(todo);
+      console.error(error);
+    } finally {
+      setIsPending(false);
     }
-  }, [formState.status, formResetKey, setIsEditing]);
+  }
 
   if (todo.done) {
     return (
@@ -44,18 +104,7 @@ export function EditTodoForm({
   }
 
   return isEditing ? (
-    <form
-      onSubmit={async (e) => {
-        e.preventDefault();
-        const formData = new FormData(e.currentTarget);
-        setIsPending(true);
-        const result = await editTodo(formState, formData);
-        setFormState(result);
-        setIsEditing(false);
-        toast.success("Todo saved.");
-      }}
-      className="flex flex-row items-center grow-0"
-    >
+    <form onSubmit={handleSubmit} className="flex flex-row items-center grow-0">
       <Input
         autofocusOnFirstRender
         name="task"
