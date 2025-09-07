@@ -9,7 +9,7 @@ import LoadingIndicator from "@/components/LoadingIndicator";
 
 type TodoProps = {
   todo: TodoType;
-  setTodo: (todo: TodoType) => void;
+  setTodo: (todo: SavedTodo) => void;
 };
 
 const baseUrl = "http://localhost:3001/todos/";
