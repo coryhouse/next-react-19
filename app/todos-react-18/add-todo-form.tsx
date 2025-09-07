@@ -1,7 +1,17 @@
 import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useState } from "react";
-import { emptyAddToDoFormState, taskSchema } from "./todo.types";
+import { taskSchema } from "./todo.types";
+
+export type AddTodoFormState = {
+  task: string;
+  error: string;
+};
+
+export const emptyAddToDoFormState: AddTodoFormState = {
+  task: "",
+  error: "",
+};
 
 type AddTodoFormProps = {
   addOptimisticTodo: (task: string) => void;
