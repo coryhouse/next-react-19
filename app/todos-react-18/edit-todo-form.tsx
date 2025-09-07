@@ -67,17 +67,13 @@ export function EditTodoForm({
         },
         body: JSON.stringify({ task }),
       });
-      if (!resp.ok) {
-        return {
-          errors: { task: "Failed to edit '" + task + "'." },
-          status: "error",
-        };
-      }
+      if (!resp.ok) throw resp;
       setFormState({
         status: "success",
       });
       setIsEditing(false);
     } catch (error) {
+      toast.error("Edit failed.");
       setFormState({
         ...formState,
         status: "error",
