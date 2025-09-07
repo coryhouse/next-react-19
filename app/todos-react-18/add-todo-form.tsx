@@ -2,6 +2,7 @@ import { Button } from "@/components/Button";
 import Input from "@/components/Input";
 import { useState } from "react";
 import { taskSchema } from "./todo.types";
+import { toast } from "sonner";
 
 export type AddTodoFormState = {
   task: string;
@@ -36,21 +37,24 @@ export function AddTodoForm({
       setFormState(emptyAddToDoFormState); // Clear form immediately upon submit rather than waiting for the optimistic add to complete (at which point React would reset automatically)
       try {
         setIsPending(true);
-        const resp = await fetch("http://localhost:3001/todos", {
+        const resp = await fetch("http://localhost:3001/tod3os", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ task, done: false }),
         });
+        if (!resp.ok) throw resp;
         const savedTodo = await resp.json();
         markOptimisticTodoComplete(savedTodo.id, task);
+        toast.success("Todo saved!");
       } catch (_error) {
         setFormState({
           ...formState,
           error: "Failed to add '" + task + "'.",
         });
         removeOptimisticTodo(task);
+        toast.error("Add failed.");
       } finally {
         setIsPending(false);
       }
