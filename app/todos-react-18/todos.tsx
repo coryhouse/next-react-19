@@ -26,6 +26,9 @@ export function Todos({ todos }: TodosProps) {
     <>
       <AddTodoForm
         addOptimisticTodo={addOptimisticTodo}
+        removeOptimisticTodo={(task: string) => {
+          setOptimisticTodos(optimisticTodos.filter((t) => t.task !== task));
+        }}
         markOptimisticTodoComplete={(id: string, task: string) => {
           setOptimisticTodos((state) =>
             state.map((i) =>
@@ -36,7 +39,18 @@ export function Todos({ todos }: TodosProps) {
       />
       <ul className="mt-2">
         {optimisticTodos.map((todo) => (
-          <Todo key={todo.task} todo={todo} />
+          <Todo
+            key={todo.task}
+            todo={todo}
+            setTodo={(todo) => {
+              const newList = [
+                ...optimisticTodos.map((t) =>
+                  "id" in t && todo.id === t.id ? todo : t
+                ),
+              ];
+              setOptimisticTodos(newList);
+            }}
+          />
         ))}
       </ul>
     </>
