@@ -1,8 +1,12 @@
-import { emptyEditTodoFormState, Todo } from "@/types/todo";
+import {
+  emptyEditTodoFormState,
+  type EditTodoFormState,
+  type SavedTodo,
+} from "./todo.types";
 import { editTodo } from "./todo-actions";
 import Input from "@/components/Input";
 import clsx from "clsx";
-import { useActionState, useEffect, useRef } from "react";
+import { useActionState, useRef } from "react";
 import { Button } from "@/components/Button";
 import LoadingIndicator from "@/components/LoadingIndicator";
 import { toast } from "sonner";
@@ -20,24 +24,28 @@ export function EditTodoForm({
   setIsEditing,
   todo,
 }: EditTodoFormProps) {
-  const [formState, editTodoAction, isPending] = useActionState(
-    editTodo,
-    emptyEditTodoFormState
-  );
   const formRef = useRef<HTMLFormElement>(null);
 
-  const formResetKey =
-    formState.status === "success" ? formState.resetKey : undefined;
+  // Wrap the server action to handle success immediately
+  const wrappedEditTodo = async (
+    currentState: EditTodoFormState,
+    formData: FormData
+  ) => {
+    const result = await editTodo(currentState, formData);
 
-  // 4 ways to handle updating form state after submit when using useActionState
-  // 1. useEffect with resetKey returned from the action (timestamp) as suggested here: https://stackoverflow.com/a/78249448/26180
-  useEffect(() => {
-    if (formState.status === "success") {
+    if (result.status === "success") {
       formRef.current?.reset();
       setIsEditing(false);
       toast.success("Todo saved.");
     }
-  }, [formState.status, formResetKey, setIsEditing]);
+
+    return result;
+  };
+
+  const [formState, editTodoAction, isPending] = useActionState(
+    wrappedEditTodo,
+    emptyEditTodoFormState
+  );
 
   // 2. formRef
   // Could just handle via JS instead of useActionState since our fancy form requires JS to function anyway
